@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">AndroidFramework</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- SSQ Project -->
+    <string name="ssq_numberchoose_hint">Number</string>
+    <string name="ssq_dialog_numberchoose_title">Please input number</string>
+    <string name="ssq_dialog_numberchoose_sure">Sure</string>
+    <string name="ssq_operator_add">Add</string>
+    <string name="ssq_operator_save">Save</string>
+    <string name="ssq_operator_cancel">Cancel</string>
+    <string name="ssq_operator_reset">Reset Current</string>
+    <string name="ssq_operator_clear">Clear All</string>
+    <string name="ssq_item_delete">Delete</string>
+    <string name="ssq_item_change">Change</string>
+    <string name="ssq_number_unit">Notes</string>
+    <string name="ssq_alert_redball">Red balls at leat selected six balls!</string>
+    <string name="ssq_alert_blueball">Blue balls at leat selected one ball</string>
+    <string name="ssq_alert_money">We don\'t comment you to buy this group!You need to pay so many money than you can get reward!</string>
+    <string name="ssq_money_unit"> yuan</string>
+    <string name="ssq_menu_save">Save to phone</string>
+
+    <string name="ssq_db_error">Copy database error!</string>
+
+    <!-- -->
+</resources>

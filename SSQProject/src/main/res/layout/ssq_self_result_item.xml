@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.yutian.androidframework.ui.layout.SSQSwipLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:UIButton="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="60dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="right">
+        <com.yutian.androidframework.ui.widgets.UIButton
+            android:id="@+id/ssq_delete"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/ssq_item_delete"
+            android:enabled="true"
+            UIButton:fillset="true"
+            UIButton:backColor="@color/deletebtnnormal"
+            UIButton:textColor="@color/white"
+            UIButton:backColorSelected="@color/deletebtnpressed"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"/>
+        <com.yutian.androidframework.ui.widgets.UIButton
+            android:id="@+id/ssq_change"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/ssq_item_change"
+            android:enabled="true"
+            UIButton:fillset="true"
+            UIButton:backColor="@color/changebtnnormal"
+            UIButton:textColor="@color/white"
+            UIButton:backColorSelected="@color/changebtnpressed"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/ssq_margin">
+        <TextView
+            android:background="@drawable/text_view_border"
+            android:id="@+id/ssq_board"
+            android:layout_gravity="center_vertical"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:gravity="center"
+            android:text="55 Notes"
+            android:textSize="16sp"
+            android:textColor="@color/label_orange"
+            android:layout_marginRight="@dimen/ssq_margin"
+            android:layout_marginLeft="@dimen/ssq_margin"/>
+
+        <com.yutian.androidframework.ui.layout.SSQResultLayout
+            android:id="@+id/m_ssq_item_result"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="ifContentScrolls">
+
+        </com.yutian.androidframework.ui.layout.SSQResultLayout>
+    </LinearLayout>
+
+</com.yutian.androidframework.ui.layout.SSQSwipLayout>

@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">我的工程</string>
+    <string name="action_settings">设置</string>
+    
+    <string name="ssq_numberchoose_hint">注数</string>
+    <string name="ssq_dialog_numberchoose_title">输入注数</string>
+    <string name="ssq_dialog_numberchoose_sure">确定</string>
+    <string name="ssq_operator_add">添加</string>
+    <string name="ssq_operator_save">保存</string>
+    <string name="ssq_operator_cancel">取消</string>
+    <string name="ssq_operator_reset">重置当前</string>
+    <string name="ssq_operator_clear">清空列表</string>
+    <string name="ssq_item_delete">删除</string>
+    <string name="ssq_item_change">修改</string>
+    <string name="ssq_number_unit">注</string>
+    <string name="ssq_alert_redball">至少要选择六个红球哦！</string>
+    <string name="ssq_alert_blueball">蓝球至少要一个的，亲！</string>
+    <string name="ssq_alert_money">不推荐您购买这样的组合！ 即使你获得了最高奖金也不能弥补你的花销的！</string>
+    <string name="ssq_money_unit">元</string>
+    <string name="ssq_menu_save">保存到手机</string>
+
+
+
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.yutian.androidframework.ui.widgets.CheckButton xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:CheckButton="http://schemas.android.com/apk/res-auto"
+    xmlns:UIButton="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/m_ssqball"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    UIButton:shap="1"
+    UIButton:fillset="true"
+    UIButton:backColor="@color/ballnormal"
+    UIButton:textColor="@color/balltextnormal"
+    UIButton:backColorSelected="@color/redpressed"
+    UIButton:textColorSelected="@color/redtextpressed"
+    CheckButton:checkBackColor="@color/redselected"
+    CheckButton:checkTextColor="@color/redtextselected" />

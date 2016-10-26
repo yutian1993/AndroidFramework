@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.yutian.androidframework.ui.layout.SSQSwipLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="80dp"
+    xmlns:UIButton="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="right">
+        <com.yutian.androidframework.ui.widgets.UIButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Delete"
+            android:enabled="false"
+            UIButton:fillset="true"
+            UIButton:backColor="@color/deletebtnnormal"
+            UIButton:textColor="@color/white"
+            UIButton:backColorSelected="@color/deletebtnpressed"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"/>
+        <com.yutian.androidframework.ui.widgets.UIButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Change"
+            android:enabled="false"
+            UIButton:fillset="true"
+            UIButton:backColor="@color/changebtnnormal"
+            UIButton:textColor="@color/white"
+            UIButton:backColorSelected="@color/changebtnpressed"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"/>
+    </LinearLayout>
+
+    <com.yutian.androidframework.ui.layout.SSQLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent" >
+
+    </com.yutian.androidframework.ui.layout.SSQLayout>
+
+</com.yutian.androidframework.ui.layout.SSQSwipLayout>

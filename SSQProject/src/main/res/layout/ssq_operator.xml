@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:UIButton="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/ssq_margin"
+    android:weightSum="5"
+    android:gravity="center">
+
+    <com.yutian.androidframework.ui.widgets.UIButton
+        android:visibility="gone"
+        android:id="@+id/m_ssq_add"
+        UIButton:fillset="true"
+        UIButton:backColor="@color/ballnormal"
+        UIButton:textColor="@color/balltextnormal"
+        UIButton:backColorSelected="@color/bluepressed"
+        UIButton:textColorSelected="@color/bluetextpressed"
+        UIButton:radius="10"
+        android:text="@string/ssq_operator_add"
+        android:textSize="@dimen/ssq_testsize"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/ssq_btnheight"
+        android:layout_marginLeft="@dimen/ssq_margin"
+        android:layout_marginRight="@dimen/ssq_margin"
+        android:paddingLeft="@dimen/ssq_padding"
+        android:paddingRight="@dimen/ssq_padding"
+        android:layout_weight="1"/>
+
+    <com.yutian.androidframework.ui.widgets.UIButton
+        android:id="@+id/m_ssq_save"
+        UIButton:fillset="true"
+        UIButton:backColor="@color/ballnormal"
+        UIButton:textColor="@color/balltextnormal"
+        UIButton:backColorSelected="@color/bluepressed"
+        UIButton:textColorSelected="@color/bluetextpressed"
+        UIButton:radius="10"
+        android:text="@string/ssq_operator_save"
+        android:textSize="@dimen/ssq_testsize"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/ssq_btnheight"
+        android:layout_marginLeft="@dimen/ssq_margin"
+        android:layout_marginRight="@dimen/ssq_margin"
+        android:paddingLeft="@dimen/ssq_padding"
+        android:paddingRight="@dimen/ssq_padding"
+        android:layout_weight="1"/>
+
+    <com.yutian.androidframework.ui.widgets.UIButton
+        android:id="@+id/m_ssq_cancel"
+        UIButton:fillset="true"
+        UIButton:backColor="@color/ballnormal"
+        UIButton:textColor="@color/balltextnormal"
+        UIButton:backColorSelected="@color/bluepressed"
+        UIButton:textColorSelected="@color/bluetextpressed"
+        UIButton:radius="10"
+        android:text="@string/ssq_operator_cancel"
+        android:textSize="@dimen/ssq_testsize"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/ssq_btnheight"
+        android:layout_marginLeft="@dimen/ssq_margin"
+        android:layout_marginRight="@dimen/ssq_margin"
+        android:paddingLeft="@dimen/ssq_padding"
+        android:paddingRight="@dimen/ssq_padding"
+        android:layout_weight="1"/>
+
+    <include layout="@layout/fragment_numberchoose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/ssq_margin"
+        android:layout_marginRight="@dimen/ssq_margin"
+        android:layout_weight="1"></include>
+
+    <com.yutian.androidframework.ui.widgets.UIButton
+        android:id="@+id/m_ssq_reset"
+        UIButton:fillset="true"
+        UIButton:backColor="@color/ballnormal"
+        UIButton:textColor="@color/balltextnormal"
+        UIButton:backColorSelected="@color/bluepressed"
+        UIButton:textColorSelected="@color/bluetextpressed"
+        UIButton:radius="10"
+        android:text="@string/ssq_operator_reset"
+        android:textSize="@dimen/ssq_testsize"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/ssq_btnheight"
+        android:layout_marginLeft="@dimen/ssq_margin"
+        android:layout_marginRight="@dimen/ssq_margin"
+        android:paddingLeft="@dimen/ssq_padding"
+        android:paddingRight="@dimen/ssq_padding"
+        android:layout_weight="1"/>
+
+    <com.yutian.androidframework.ui.widgets.UIButton
+        android:id="@+id/m_ssq_clear"
+        UIButton:fillset="true"
+        UIButton:backColor="@color/ballnormal"
+        UIButton:textColor="@color/balltextnormal"
+        UIButton:backColorSelected="@color/bluepressed"
+        UIButton:textColorSelected="@color/bluetextpressed"
+        UIButton:radius="10"
+        android:text="@string/ssq_operator_clear"
+        android:textSize="@dimen/ssq_testsize"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/ssq_btnheight"
+        android:layout_marginLeft="@dimen/ssq_margin"
+        android:layout_marginRight="@dimen/ssq_margin"
+        android:paddingLeft="@dimen/ssq_padding"
+        android:paddingRight="@dimen/ssq_padding"
+        android:layout_weight="1"/>
+
+</LinearLayout>

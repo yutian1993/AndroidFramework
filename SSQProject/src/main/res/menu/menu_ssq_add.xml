@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.activity.SSQBallChooseActivity">
+
+    <item
+        android:icon="@drawable/menu_ssq_saveall"
+        android:orderInCategory="80"
+        android:id="@+id/m_menu_ssq_save"
+        android:title="@string/ssq_menu_save"
+        app:showAsAction="ifRoom"
+        tools:ignore="AppCompatResource"></item>
+
+</menu>

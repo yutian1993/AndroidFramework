@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AndroidFramework.iml" filepath="$PROJECT_DIR$/AndroidFramework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SSQProject/app.iml" filepath="$PROJECT_DIR$/SSQProject/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libjavafunctiontest/libjavafunctiontest.iml" filepath="$PROJECT_DIR$/libjavafunctiontest/libjavafunctiontest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/libjavahelp/libjavahelp.iml" filepath="$PROJECT_DIR$/libjavahelp/libjavahelp.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<View xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/line_normal"
+    android:layout_width="3dp"
+    android:layout_height="3dp"
+    android:background="#ff92ed" />
