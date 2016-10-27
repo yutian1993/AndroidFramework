@@ -30,6 +30,9 @@ public class SSQResultLayout extends RelativeLayout {
 
     private Context mContext;
 
+    //为List分割线添加的对象
+    private boolean mNeedSave = false;
+
     public SSQResultLayout(Context context) {
         this(context, null);
     }
@@ -169,5 +172,13 @@ public class SSQResultLayout extends RelativeLayout {
         this.mSSQDataModel = mSSQDataModel;
         drawCustomize();
         invalidate();
+    }
+
+    public boolean isNeedSave() {
+        return mNeedSave;
+    }
+
+    public void setNeedSave(boolean mNewAdd) {
+        this.mNeedSave = mNewAdd;
     }
 }

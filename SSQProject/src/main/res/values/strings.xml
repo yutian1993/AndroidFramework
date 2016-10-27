@@ -19,6 +19,8 @@
     <string name="ssq_alert_money">We don\'t comment you to buy this group!You need to pay so many money than you can get reward!</string>
     <string name="ssq_money_unit"> yuan</string>
     <string name="ssq_menu_save">Save to phone</string>
+    <string name="ssq_save_alert">Nothing need to Save</string>
+    <string name="ssq_delete_error">Delete this note error!</string>
 
     <string name="ssq_db_error">Copy database error!</string>
 

@@ -18,6 +18,9 @@ public class SelfSSQDataModel extends SSQDataModel {
     private String priceval;
     private Date addtime;
 
+    //Add for DB loginc
+    private boolean needUpdate = true;
+
     public SelfSSQDataModel() {
     }
 
@@ -133,6 +136,28 @@ public class SelfSSQDataModel extends SSQDataModel {
     }
 
     /**
+     * 更新model数据到do数据
+     * @param selfSSQDataModel model
+     * @param myssqdata do
+     */
+    public static MYSSQDATA updateSelfSSQDataModelToMySSQData(SelfSSQDataModel selfSSQDataModel,
+                                                         MYSSQDATA myssqdata) {
+        if (selfSSQDataModel == null || myssqdata == null)
+            return null;
+        myssqdata.setRED1(selfSSQDataModel.red1);
+        myssqdata.setRED2(selfSSQDataModel.red2);
+        myssqdata.setRED3(selfSSQDataModel.red3);
+        myssqdata.setRED4(selfSSQDataModel.red4);
+        myssqdata.setRED5(selfSSQDataModel.red5);
+        myssqdata.setRED6(selfSSQDataModel.red6);
+        myssqdata.setBLUE(selfSSQDataModel.blue);
+        myssqdata.setREDBALL(selfSSQDataModel.redballs);
+        myssqdata.setBLUEBALL(selfSSQDataModel.blueballs);
+        myssqdata.setCOUNT(selfSSQDataModel.count);
+        return myssqdata;
+    }
+
+    /**
      * Convert SelfSSQDataModels to MYSSQDATAs
      *
      * @param selfSSQDataModels
@@ -146,5 +171,13 @@ public class SelfSSQDataModel extends SSQDataModel {
             results.add(convertSelfSSQDataModelToMySSQData(ssqdata));
         }
         return results;
+    }
+
+    public boolean isNeedUpdate() {
+        return needUpdate;
+    }
+
+    public void setNeedUpdate(boolean needUpdate) {
+        this.needUpdate = needUpdate;
     }
 }

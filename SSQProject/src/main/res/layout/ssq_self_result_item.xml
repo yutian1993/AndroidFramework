@@ -42,7 +42,7 @@
         android:layout_height="match_parent"
         android:layout_margin="@dimen/ssq_margin">
         <TextView
-            android:background="@drawable/text_view_border"
+            android:background="@drawable/ssq_listshow_bord"
             android:id="@+id/ssq_board"
             android:layout_gravity="center_vertical"
             android:layout_width="56dp"

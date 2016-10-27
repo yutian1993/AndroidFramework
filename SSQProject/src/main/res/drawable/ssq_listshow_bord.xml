@@ -7,7 +7,7 @@
         android:width="0.5dp"
         android:color="@color/label_orange"/>
     <!-- 圆角 -->
-    <corners android:radius="3dp"/>
+    <corners android:radius="5dp"/>
     <!-- 边距 -->
     <padding
         android:top="2dp"

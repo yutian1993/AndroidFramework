@@ -98,7 +98,9 @@ public class SSQUtil {
     {
         originalObj.setCount(newObj.getCount());
         originalObj.setPay(newObj.getPay());
-        originalObj.setNeedSave(true);
+        originalObj.setNeedUpdate(true);
+        //更新数据Model时不会更新是否需要保存，只设置更新属性
+//        originalObj.setNeedSave(newObj.isNeedSave());
         originalObj.setRedBallList(newObj.getRedBallList());
         originalObj.setBlueBallList(newObj.getBlueBallList());
         return true;

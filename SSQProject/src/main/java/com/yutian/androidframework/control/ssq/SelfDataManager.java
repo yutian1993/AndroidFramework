@@ -21,7 +21,32 @@ public interface SelfDataManager {
 
     public SelfSSQDataModel getSelfSSQDataModel(String id, String number);
 
+    /**
+     * 自己选择的数据保存到数据库
+     * @param selfDataModel 本次选择
+     * @return 是否成功插入
+     */
     public boolean insertSelfSSQDataModel(SelfDataModel selfDataModel);
+
+    /**
+     * 更新一条数据信息到数据库
+     * @param selfSSQDataModel 更新的model（id和number不能有误，否者更新失败）
+     * @return
+     */
+    public boolean updateSelfSSQDataModel(SelfSSQDataModel selfSSQDataModel);
+
+    /**
+     * 删除掉一个selfDataModel
+     * @return
+     */
+    public boolean deleteSelfSSQDataModel(String period, String id, int number);
+
+    /**
+     * 根据SelfDataModel删除相关的内容
+     * @param selfDataModel
+     * @return
+     */
+    public boolean deleteSelfSSQDateModel(SelfDataModel selfDataModel);
 
     /**
      *

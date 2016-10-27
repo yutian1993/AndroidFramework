@@ -76,15 +76,90 @@ public class SelfDataControl {
     }
 
     /**
+     * 删除一个SelfSSQDATA的一个ID对应的所有选项数据
+     * @param id 数据对应的ID号
+     * @return
+     */
+    public boolean deleteSelfSSQDataModels(String id) {
+        if (getSelfSSQDataModels(id).size() > 0) {
+            mDaoSession.getDatabase().execSQL("DELETE FROM MYSSQDATA WHERE ID ='" + id + "'");
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 删除一个SelfSSQDATA
+     * @param id 数据对应的ID号
+     * @param number 数据对应的序列号(-1时删除所有数据)
+     * @return
+     */
+    public boolean deleteSelfSSQDataModel(String id, int number) {
+        if (number == -1)
+            return deleteSelfSSQDataModels(id);
+
+        if (getSelfSSQDataModel(id, number) != null) {
+            mDaoSession.getDatabase().execSQL("DELETE FROM MYSSQDATA WHERE ID ='" + id +
+                    "' AND NUMBER = '" + number + "'");
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 删除指定期数和ID号的记录数
+     * @param period 期数
+     * @param id ID号
+     * @param number 删除的数量（为-1时，删除该条记录）
+     * @return
+     */
+    public boolean deleteBuyInfor(String period, String id, int number) {
+        if (getSelfBuyInfor(period, id) != null) {
+            if (number == -1) {   //删除该条记录
+                mDaoSession.getDatabase().execSQL("DELETE FROM MYBUY WHERE ID ='" + id +
+                        "' AND PERIOD = '" + period + "'");
+            } else {
+                MYBUY dbBuy = getSelfBuyInfor(period, id);
+                if (dbBuy.getNUMBER() <= 1) {
+                    mDaoSession.getDatabase().execSQL("DELETE FROM MYBUY WHERE ID ='" + id +
+                            "' AND PERIOD = '" + period + "'");
+                } else {
+                    mDaoSession.getDatabase().execSQL("UPDATE MYBUY SET NUMBER = '" +
+                            (dbBuy.getNUMBER() - 1) + "' WHERE " +
+                            "PERIOD ='" + dbBuy.getPERIOD() + "' AND ID ='" + dbBuy.getID() + "'");
+                }
+            }
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 获取一个指定period的购买信息
+     * @param period period
+     * @return
+     */
+    public List<MYBUY> getSelfBuyInfor(String period) {
+        QueryBuilder mybuy = mBuyDao.queryBuilder();
+        mybuy.where(MYBUYDao.Properties.PERIOD.eq(period));
+        return mybuy.list();
+    }
+
+    /**
      * 获取一个指定period && id的购买信息
      * @param period 期数
      * @param id ID
      * @return
      */
-    public List<MYBUY> getSelfBuyInfor(String period, String id) {
+    public MYBUY getSelfBuyInfor(String period, String id) {
         QueryBuilder mybuy = mBuyDao.queryBuilder();
         mybuy.where(MYBUYDao.Properties.PERIOD.eq(period),MYBUYDao.Properties.ID.eq(id));
-        return mybuy.list();
+        List<MYBUY> results = mybuy.list();
+        return results.size() == 0 ? null : results.get(0);
     }
 
     /**
@@ -93,7 +168,7 @@ public class SelfDataControl {
      * @param number 序列号
      * @return 查询到的数据
      */
-    public SelfSSQDataModel getSelfSSQDataModel(String id, String number) {
+    public SelfSSQDataModel getSelfSSQDataModel(String id, int number) {
         QueryBuilder<MYSSQDATA> myssqdata = mSSQDataDao.queryBuilder();
         myssqdata.where(MYSSQDATADao.Properties.ID.eq(id));
         myssqdata.where(MYSSQDATADao.Properties.NUMBER.eq(number));
@@ -110,17 +185,14 @@ public class SelfDataControl {
      * @return
      */
     public boolean insertSelfBuyInfor(MYBUY mybuy) {
-        List<MYBUY> datas = getSelfBuyInfor(mybuy.getPERIOD(), mybuy.getID());
-        if (datas.size() > 1) {
-            //error
-            return false;
-        } else if (datas.size() == 0) {
+        MYBUY dbBuy = getSelfBuyInfor(mybuy.getPERIOD(), mybuy.getID());
+        if (dbBuy == null) {
             mBuyDao.insert(mybuy);
         } else {
 //            datas.get(0).setNUMBER(mybuy.getNUMBER() + datas.get(0).getNUMBER());
 //            mBuyDao.update(datas.get(0));
             mDaoSession.getDatabase().execSQL("UPDATE MYBUY SET NUMBER = '"+
-                    (mybuy.getNUMBER() + datas.get(0).getNUMBER()) +"' WHERE " +
+                    (mybuy.getNUMBER() + dbBuy.getNUMBER()) +"' WHERE " +
                     "PERIOD ='" + mybuy.getPERIOD() +"' AND ID ='" + mybuy.getID() + "'");
         }
 
@@ -160,12 +232,39 @@ public class SelfDataControl {
         } else {
             number = searchData.getNUMBER();
             mDaoSession.getDatabase().execSQL("UPDATE MYSSQDATA SET COUNT = '" +
-                    (searchData.getCOUNT() + ssqdatamodel.getCount()) + "' WHERE " +
+                    ssqdatamodel.getCount() + "' WHERE " +
                     "ID ='" + searchData.getID() + "' AND NUMBER ='" + searchData.getNUMBER() + "'");
 //            searchData.setCOUNT(searchData.getCOUNT() + ssqdatamodel.getCount());
 //            mSSQDataDao.update(searchData);
         }
         return number;
+    }
+
+    /**
+     * 更新ssqDataModel信息到数据库
+     * @param ssqDataModel
+     * @return
+     */
+    public boolean updateSelfSSQDataModel(SelfSSQDataModel ssqDataModel) {
+        List<MYSSQDATA> myssqdatas = mSSQDataDao.queryBuilder().where(
+                MYSSQDATADao.Properties.ID.eq(ssqDataModel.getId()),
+                        MYSSQDATADao.Properties.NUMBER.eq(ssqDataModel.getNumber())
+        ).list();
+
+        if (myssqdatas.size() == 1) {
+            MYSSQDATA update = SelfSSQDataModel.updateSelfSSQDataModelToMySSQData(ssqDataModel,myssqdatas.get(0));
+            String sql = "UPDATE MYSSQDATA SET RED1='"+ssqDataModel.getRed1()+"',RED2='"+ssqDataModel.getRed2()+
+                    "',RED3='"+ssqDataModel.getRed3()+"',RED4='"+ssqDataModel.getRed4()+"',RED5='"+ssqDataModel.getRed5()+
+                    "',RED6='"+ssqDataModel.getRed6()+"',BLUE='"+ssqDataModel.getBlue()+"',REDBALL='"+ssqDataModel.getRedballs()+
+                    "',BLUEBALL='"+ssqDataModel.getBlueballs()+"',COUNT= '"+ssqDataModel.getCount()+"'" +
+                    "WHERE ID='" + ssqDataModel.getId()+"' AND NUMBER='"+ssqDataModel.getNumber()+"'";
+            System.out.println(sql);
+            mDaoSession.getDatabase().execSQL(sql);
+//            mSSQDataDao.update(update);
+        } else {
+            return false;
+        }
+        return true;
     }
 
     /**

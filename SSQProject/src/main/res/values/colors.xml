@@ -32,5 +32,8 @@
     <color name="numberborad">#bdc2c5</color>
 
     <color name="label_orange">#d6e68758</color>
+    <color name="listborder_normal">#bababa</color>
+    <color name="listborder_save">#FF4081</color>
+    <color name="listborder_show">#3ffc00</color>
 
 </resources>

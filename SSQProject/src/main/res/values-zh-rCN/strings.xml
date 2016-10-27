@@ -18,7 +18,8 @@
     <string name="ssq_alert_money">不推荐您购买这样的组合！ 即使你获得了最高奖金也不能弥补你的花销的！</string>
     <string name="ssq_money_unit">元</string>
     <string name="ssq_menu_save">保存到手机</string>
-
+    <string name="ssq_save_alert">没有新的选择需要保存哦！</string>
+    <string name="ssq_delete_error">删除出错！</string>
 
 
 </resources>
