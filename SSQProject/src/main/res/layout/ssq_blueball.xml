@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- 蓝球布局信息，避免在代码中生成布局代码-->
 <com.yutian.androidframework.ui.widgets.CheckButton xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:CheckButton="http://schemas.android.com/apk/res-auto"
     xmlns:UIButton="http://schemas.android.com/apk/res-auto"

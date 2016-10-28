@@ -18,8 +18,10 @@ public class SelfSSQDataModel extends SSQDataModel {
     private String priceval;
     private Date addtime;
 
-    //Add for DB loginc
+    //Add for DB logic
     private boolean needUpdate = true;
+    //Add for Code logic to judge db has same choose
+    private boolean dbDumplicate = false;
 
     public SelfSSQDataModel() {
     }
@@ -179,5 +181,13 @@ public class SelfSSQDataModel extends SSQDataModel {
 
     public void setNeedUpdate(boolean needUpdate) {
         this.needUpdate = needUpdate;
+    }
+
+    public boolean isDbDumplicate() {
+        return dbDumplicate;
+    }
+
+    public void setDbDumplicate(boolean dbDumplicate) {
+        this.dbDumplicate = dbDumplicate;
     }
 }

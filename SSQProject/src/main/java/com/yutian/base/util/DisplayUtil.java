@@ -41,4 +41,8 @@ public class DisplayUtil {
         return parent.getPaint().measureText(text);
     }
 
+    public static float getTextPxSize(TextView parent, CharSequence text) {
+        return getTextPxSize(parent, text.toString());
+    }
+
 }

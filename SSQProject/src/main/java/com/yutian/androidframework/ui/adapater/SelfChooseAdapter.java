@@ -149,6 +149,7 @@ public class SelfChooseAdapter extends RecyclerView.Adapter<SelfChooseAdapter.Se
             int pay = newmodel.getPay();
 
             UISSQDataModel uimodel = mDataHas.get(key);
+            uimodel.setNeedSave(true);
             uimodel.setNeedUpdate(true);
             uimodel.setCount(pour + uimodel.getCount());
             uimodel.setPay(pay + uimodel.getPay());

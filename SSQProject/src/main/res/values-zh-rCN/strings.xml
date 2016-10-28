@@ -21,5 +21,8 @@
     <string name="ssq_save_alert">没有新的选择需要保存哦！</string>
     <string name="ssq_delete_error">删除出错！</string>
 
+    <string name="ssq_choose_period">期数</string>
+    <string name="ssq_chhose_note">注数</string>
+
 
 </resources>

@@ -23,6 +23,9 @@
     <string name="ssq_delete_error">Delete this note error!</string>
 
     <string name="ssq_db_error">Copy database error!</string>
+    
+    <string name="ssq_choose_period">Period</string>
+    <string name="ssq_chhose_note">Notes</string>
 
     <!-- -->
 </resources>

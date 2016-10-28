@@ -7,8 +7,10 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.yutian.DBFile.SSQControl.SSQModel.SSQDataModel;
+import com.yutian.androidframework.control.ssq.ssqmodel.SSQDataModel;
+import com.yutian.androidframework.ui.layout.SSQResultLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -38,11 +40,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ssq_add);
+        setContentView(R.layout.ssq_main_show_item);
 
-        ButterKnife.bind(this);
-
-        view = findViewById(R.id.ssq_board);
+//        ButterKnife.bind(this);
+//
+//        view = findViewById(R.id.ssq_board);
 
 //        DBConfigControl.getInstance(this).addNewConfigVal("Name", "wuwenchuan");
 //        System.out.println(DBConfigControl.getInstance(this).deleteConfigVal("Name"));
@@ -68,21 +70,20 @@ public class MainActivity extends AppCompatActivity {
 //                if (animator == null)
 //                    System.out.println("Null information");
 //                animator.start();
-//                SSQDataModel mSSQDataModel = new SSQDataModel();
-//                List<String> reDballs = new ArrayList<>();
-//                reDballs.add("01");
-//                reDballs.add("06");
-//                reDballs.add("07");
-//                reDballs.add("09");
-//                reDballs.add("33");
-//                reDballs.add("21");
-//                List<String> blueballs = new ArrayList<>();
-//                blueballs.add("06");
-//                blueballs.add("07");
-//                blueballs.add("09");
-//                mSSQDataModel.setRedBalls(reDballs);
-//                mSSQDataModel.setBlueBalls(blueballs);
-//                ((SSQResultLayout)findViewById(R.id.m_ssq_result)).setmSSQDataModel(mSSQDataModel);
+                SSQDataModel mSSQDataModel = new SSQDataModel();
+                List<String> reDballs = new ArrayList<>();
+                reDballs.add("01");
+                reDballs.add("06");
+                reDballs.add("07");
+                reDballs.add("09");
+                reDballs.add("33");
+                List<String> blueballs = new ArrayList<>();
+                blueballs.add("09");
+                mSSQDataModel.setRedBallList(reDballs);
+                mSSQDataModel.setBlueBallList(blueballs);
+        SSQResultLayout temp = ((SSQResultLayout)findViewById(R.id.m_ssq_item_result));
+        temp.setLimitSize(true);
+        temp.setmSSQDataModel(mSSQDataModel);
 //
 //                ObjectAnimator nopeAnimator = AnimationUtil.nope(view, DisplayUtil.dipToPx(view.getContext(), 5));
 //                nopeAnimator.setRepeatCount(ValueAnimator.INFINITE);

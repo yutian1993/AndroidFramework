@@ -16,7 +16,33 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
+            app:popupTheme="@style/AppTheme.PopupOverlay" >
+
+            <com.yutian.androidframework.ui.layout.SSQInformationShow
+                xmlns:SSQInformationShow="http://schemas.android.com/apk/res-auto"
+                SSQInformationShow:titlestyle="@drawable/infor_text_titile"
+                SSQInformationShow:titleshow="@string/ssq_choose_period"
+                SSQInformationShow:titlecolor="@color/redtextpressed"
+                SSQInformationShow:textstyle="@drawable/infor_text_show"
+                SSQInformationShow:textshow=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/ssq_testsize"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/m_titile_show_period"/>
+
+            <com.yutian.androidframework.ui.layout.SSQInformationShow
+                xmlns:SSQInformationShow="http://schemas.android.com/apk/res-auto"
+                SSQInformationShow:titlestyle="@drawable/infor_text_titile"
+                SSQInformationShow:titleshow="@string/ssq_chhose_note"
+                SSQInformationShow:titlecolor="@color/redtextpressed"
+                SSQInformationShow:textstyle="@drawable/infor_text_show"
+                SSQInformationShow:textshow=""
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/ssq_testsize"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/m_titile_show_note"/>
 
         </android.support.v7.widget.Toolbar>
 

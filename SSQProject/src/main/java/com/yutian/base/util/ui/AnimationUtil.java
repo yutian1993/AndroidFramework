@@ -19,7 +19,7 @@ public class AnimationUtil {
 
     public static void alertview(View view) {
         ObjectAnimator animator = scaleAndRotation(view, 1f);
-        animator.setRepeatCount(ValueAnimator.INFINITE);
+        animator.setRepeatCount(0);
         animator.start();
     }
 

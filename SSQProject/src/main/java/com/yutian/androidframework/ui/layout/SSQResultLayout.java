@@ -32,6 +32,8 @@ public class SSQResultLayout extends RelativeLayout {
 
     //为List分割线添加的对象
     private boolean mNeedSave = false;
+    //为UI添加限制Ball的最大大小
+    private boolean mLimitSize = false;
 
     public SSQResultLayout(Context context) {
         this(context, null);
@@ -95,6 +97,11 @@ public class SSQResultLayout extends RelativeLayout {
         int ballMargin = DisplayUtil.dipToPx(mContext,  Constants.SSQ_BALL_MARGIN);
         int ballsize = SSQUtil.cacluteBallSize(mContext, mWidth, mHeight, redBalls.size() + blueBalls.size()
                 , ballMargin);
+
+        if (mLimitSize)
+            if (ballsize > Constants.SSQ_MAX_SIZE)
+                ballsize = Constants.SSQ_MAX_SIZE;
+
 
         int topid = 0;
         int lastid = 0;
@@ -180,5 +187,13 @@ public class SSQResultLayout extends RelativeLayout {
 
     public void setNeedSave(boolean mNewAdd) {
         this.mNeedSave = mNewAdd;
+    }
+
+    public boolean isLimitSize() {
+        return mLimitSize;
+    }
+
+    public void setLimitSize(boolean limitSize) {
+        this.mLimitSize = limitSize;
     }
 }

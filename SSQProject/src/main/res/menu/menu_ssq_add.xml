@@ -5,7 +5,7 @@
     tools:context=".ui.activity.SSQBallChooseActivity">
 
     <item
-        android:icon="@drawable/menu_ssq_saveall"
+        android:icon="@drawable/ssq_menu_choose_save"
         android:orderInCategory="80"
         android:id="@+id/m_menu_ssq_save"
         android:title="@string/ssq_menu_save"

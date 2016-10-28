@@ -234,6 +234,7 @@ public class SelfDataControl {
             mDaoSession.getDatabase().execSQL("UPDATE MYSSQDATA SET COUNT = '" +
                     ssqdatamodel.getCount() + "' WHERE " +
                     "ID ='" + searchData.getID() + "' AND NUMBER ='" + searchData.getNUMBER() + "'");
+            ssqdatamodel.setDbDumplicate(true);
 //            searchData.setCOUNT(searchData.getCOUNT() + ssqdatamodel.getCount());
 //            mSSQDataDao.update(searchData);
         }

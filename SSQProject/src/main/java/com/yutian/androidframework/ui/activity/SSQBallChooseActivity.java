@@ -1,8 +1,10 @@
 package com.yutian.androidframework.ui.activity;
 
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +27,7 @@ import com.yutian.androidframework.ui.layout.SSQLayout;
 import com.yutian.androidframework.control.ssq.Constants;
 import com.yutian.androidframework.ui.widgets.UIButton;
 import com.yutian.base.util.DirUtil;
+import com.yutian.base.util.ui.AnimationUtil;
 import com.yutian.util.SSQLibUtil;
 
 import java.util.List;
@@ -42,6 +45,8 @@ public class SSQBallChooseActivity extends AppCompatActivity implements View.OnC
     private UIButton mSsqReset;
     private UIButton mSsqClear;
     private NumberChooseFragement mNumberChoose;
+    private MenuItem mSaveControl;
+    private boolean mSaveStatusChange = false;
     //Adapater Parameters
     private boolean isChanged = false;
     private int mUpdateItemID;
@@ -81,9 +86,11 @@ public class SSQBallChooseActivity extends AppCompatActivity implements View.OnC
         mSsqSelected = (SSQLayout) findViewById(R.id.ssq_balls);
         mNumberChoose = (NumberChooseFragement) getFragmentManager().findFragmentById(R.id.fragment_numberchoose);
 
-        //
+        //Toobar设置
         Toolbar mToolbar = (Toolbar) findViewById(R.id.m_ssq_toolbar);
         setSupportActionBar(mToolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        mToolbar.setNavigationIcon(R.drawable.activity_back);
     }
 
     public void initselfdata() {
@@ -135,6 +142,11 @@ public class SSQBallChooseActivity extends AppCompatActivity implements View.OnC
                 mSelfChooseAdapter.addSSQDataModel(newSeleted);
                 mSelfChooseAdapter.notifyDataSetChanged();
 
+                if (mSaveStatusChange) {
+                    mSaveControl.setIcon(R.drawable.ssq_menu_choose_save);
+                    AnimationUtil.alertview(findViewById(R.id.m_menu_ssq_save));
+                    mSaveStatusChange = false;
+                }
                 break;
             case R.id.m_ssq_cancel:
                 isChanged = false;
@@ -247,6 +259,7 @@ public class SSQBallChooseActivity extends AppCompatActivity implements View.OnC
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_ssq_add, menu);
+        mSaveControl = menu.findItem(R.id.m_menu_ssq_save);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -268,8 +281,16 @@ public class SSQBallChooseActivity extends AppCompatActivity implements View.OnC
                     }
                     mSelfChooseAdapter.notifyDataSetChanged();
                 }
+                item.setIcon(R.drawable.ssq_menu_choose_ok);
+                AnimationUtil.alertview(findViewById(R.id.m_menu_ssq_save));
+                mSaveStatusChange = true;
+//                findViewById(R.id.m_menu_ssq_save).setBackgroundResource(R.drawable.ssq_menu_choose_save);
+//                MenuItemCompat.getActionView(item).setBackgroundResource(R.drawable.ssq_menu_choose_save);
+//                item.getActionView();
+//                AnimationUtil.alertview(findViewById(R.id.m_menu_ssq_save));
                 return true;
-
+            case android.R.id.home:
+                SSQBallChooseActivity.this.finish();
             default:
                 //Do nothing
                 break;

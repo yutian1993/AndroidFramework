@@ -13,4 +13,7 @@
     <dimen name="ssq_testsize">16dp</dimen>
     <dimen name="ssq_btnradius">5dp</dimen>
 
+    <!-- -->
+    <dimen name="infor_textsize">1sp</dimen>
+
 </resources>

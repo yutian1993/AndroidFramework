@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- 分割线，便于直接加载，避免在代码中生成布局信息 -->
 <View xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/line_normal"
     android:layout_width="3dp"

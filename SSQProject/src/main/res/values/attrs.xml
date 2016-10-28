@@ -19,4 +19,18 @@
         <attr name="radius" format="float"></attr>
     </declare-styleable>
 
+    <declare-styleable name="SSQInformationShow">
+        <attr name="titlestyle" format="reference"></attr>
+        <attr name="titleshow" format="string"></attr>
+        <!--<attr name="titlefontsize" format="dimension"></attr>-->
+        <attr name="titlecolor" format="color"></attr>
+
+        <attr name="textstyle" format="reference"></attr>
+        <attr name="textshow" format="string"></attr>
+        <attr name="textcolor" format="color"></attr>
+
+        <attr name="textfontsize" format="dimension"></attr>
+
+    </declare-styleable>
+
 </resources>

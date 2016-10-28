@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--在我的选择中recycleview的list列表item使用该layout-->
 <com.yutian.androidframework.ui.layout.SSQSwipLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:UIButton="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"

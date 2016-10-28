@@ -51,10 +51,13 @@ public class SelfDataManagerImpl implements SelfDataManager {
 
             Date currentDate = new Date();
             String id = DateUtil.formatDBSelfSSQID(currentDate);
+            int insertNumber = 0;
             for (SelfSSQDataModel newObj :
                     allObjects) {
                 newObj.setId(id);
                 newObj.setNumber(gSelfDataContorl.insertSelfSSQDataModel(newObj));
+                if (!newObj.isDbDumplicate())
+                    insertNumber++;
                 newObj.setAddtime(currentDate);
             }
 
@@ -62,7 +65,7 @@ public class SelfDataManagerImpl implements SelfDataManager {
             MYBUY newObj = new MYBUY();
             newObj.setPERIOD(selfDataModel.getPeriod());
             newObj.setID(id);
-            newObj.setNUMBER(allObjects.size());
+            newObj.setNUMBER(insertNumber);
             newObj.setADDTIME(currentDate);
             return gSelfDataContorl.insertSelfBuyInfor(newObj);
         } else {

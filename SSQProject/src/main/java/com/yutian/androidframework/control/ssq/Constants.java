@@ -23,10 +23,18 @@ public class Constants {
     public static final float SSQ_BALL_PADDING_RIGHT = 4;
     public static final float SSQ_BALL_PADDING_TOP = 4;
     public static final float SSQ_BALL_PADDING_BOTTOM = 4;
+    public static final int SSQ_MAX_SIZE = 100;
 
     public static final float SSQ_SPLITLINE_WIDTH = 3;
 
     public static final String DB_NAME = "ssq.db";
     public static final String REMOTE_URL = "GRAP_URL";
     public static final int SPLIT_COUNT = 10;
+
+    public static final int INFORMATION_ID = 1234;
+    public static final float INFORMATION_TEXT_FONT = 6;
+    public static final float INFORMATION_PADDUBG_LEFT = 15;
+    public static final float INFORMATION_PADDUBG_RIGHT = 15;
+    public static final float INFORMATION_PADDUBG_TOP = 10;
+    public static final float INFORMATION_PADDUBG_BOTTOM = 10;
 }
