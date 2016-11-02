@@ -36,4 +36,14 @@
     <color name="listborder_save">#FF4081</color>
     <color name="listborder_show">#3ffc00</color>
 
+    <color name="btn_end_color">#64e9d4fd</color>
+    <color name="btn_start_color">#64c88dff</color>
+
+    <!-- Item 详情文字颜色方案 -->
+    <color name="btntxt_pressed_color">#FFFC040C</color>
+    <color name="btntxt_normal_color">#e94079</color>
+    <color name="btntxt_diable_color">#bababa</color>
+
+
+
 </resources>

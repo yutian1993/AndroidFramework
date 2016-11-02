@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#ffff0000">
+    <item
+        android:id="@android:id/mask"
+        android:drawable="@android:color/white">
+        <shape android:shape="rectangle">
+            <gradient
+                android:angle="90"
+                android:centerX="0.5"
+                android:centerY="0.5"
+                android:endColor="@color/btn_end_color"
+                android:gradientRadius="90"
+                android:startColor="@color/btn_start_color"
+                android:type="radial"
+                android:useLevel="false" />
+        </shape>
+    </item>
+
+</ripple>
+
+<!--<selector xmlns:android="http://schemas.android.com/apk/res/android">-->
+    <!--&lt;!&ndash;<item android:state_pressed="true" >&ndash;&gt;-->
+        <!--&lt;!&ndash;<color android:color="@android:color/transparent"></color>&ndash;&gt;-->
+        <!--&lt;!&ndash;<set>&ndash;&gt;-->
+            <!--&lt;!&ndash;<objectAnimator&ndash;&gt;-->
+                <!--&lt;!&ndash;android:propertyName="translationZ"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:duration="@android:integer/config_shortAnimTime"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:valueFrom="0"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:valueTo="20dp"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:valueType="floatType"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;</set>&ndash;&gt;-->
+    <!--&lt;!&ndash;</item>&ndash;&gt;-->
+    <!--<item>-->
+        <!--<shape-->
+            <!--android:shape="rectangle">-->
+            <!--&lt;!&ndash;<solid&ndash;&gt;-->
+                <!--&lt;!&ndash;android:color="@android:color/transparent"></solid>&ndash;&gt;-->
+
+        <!--</shape>-->
+        <!--&lt;!&ndash;<set>&ndash;&gt;-->
+            <!--&lt;!&ndash;<objectAnimator&ndash;&gt;-->
+                <!--&lt;!&ndash;android:propertyName="translationZ"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:duration="100"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:valueTo="0"&ndash;&gt;-->
+                <!--&lt;!&ndash;android:valueType="floatType"/>&ndash;&gt;-->
+        <!--&lt;!&ndash;</set>&ndash;&gt;-->
+    <!--</item>-->
+
+    <!--<item-->
+        <!--android:state_pressed="true">-->
+        <!--<shape-->
+            <!--android:shape="rectangle">-->
+            <!--<gradient-->
+                <!--android:angle="90"-->
+                <!--android:startColor="@color/btn_start_color"-->
+                <!--android:endColor="@color/btn_end_color"-->
+                <!--android:centerX="0.5"-->
+                <!--android:centerY="0.5"-->
+                <!--android:type="radial"-->
+                <!--android:useLevel="false"-->
+                <!--android:gradientRadius="90"-->
+                <!--/>-->
+            <!--&lt;!&ndash;<solid&ndash;&gt;-->
+            <!--&lt;!&ndash;android:color="@android:color/transparent"></solid>&ndash;&gt;-->
+
+        <!--</shape>-->
+    <!--</item>-->
+
+<!--</selector>-->
