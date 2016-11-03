@@ -24,5 +24,14 @@
     <string name="ssq_choose_period">期数</string>
     <string name="ssq_chhose_note">注数</string>
 
+    <!-- 主页面显示需要的字符串-->
+    <string name="ssq_mainperiod_infor">第%s期开奖结果</string>
+    <string name="ssq_mainperiod_time_infor">开奖时间：%s（%s）</string>
+    <string name="ssq_mainperiod_price_infor">一等奖：%s注</string>
+    <string name="ssq_mainperiod_value_infor">奖金：%s元</string>
+    <string name="ssq_mainitem_more_text">详情</string>
+    <string name="ssq_mainperiod_myprice_infor">我的中奖：%注</string>
+    <string name="ssq_mainperiod_myprice">奖励等级：</string>
+
 
 </resources>

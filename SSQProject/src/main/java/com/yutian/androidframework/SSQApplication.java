@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.yutian.androidframework.control.ssq.Constants;
 import com.yutian.base.database.def.SSQDBHelper;
 import com.yutian.base.database.srcgen.DaoMaster;
 import com.yutian.base.database.srcgen.DaoSession;
@@ -62,6 +63,14 @@ public class SSQApplication extends Application {
 
     @Override
     public void onCreate() {
+        Constants.G_MAINPERIOD_INFOR = getResources().getString(R.string.ssq_mainperiod_infor);
+        Constants.G_MAINPERIOD_TIME_INFOR = getResources().getString(R.string.ssq_mainperiod_time_infor);
+        Constants.G_MAINPERIOD_PRICE_INFOR = getResources().getString(R.string.ssq_mainperiod_price_infor);
+        Constants.G_MAINPERIOD_PRICE_VAL_INFOR = getResources().getString(R.string.ssq_mainperiod_value_infor);
+        Constants.G_MAINPERIOD_MOTE_TEXT = getResources().getString(R.string.ssq_mainitem_more_text);
+        Constants.G_MAINPERIOD_MYPRICE_INFOR = getResources().getString(R.string.ssq_mainperiod_myprice_infor);
+        Constants.G_MAINPERIOD_MYPRICE = getResources().getString(R.string.ssq_mainperiod_myprice);
+
         super.onCreate();
     }
 }

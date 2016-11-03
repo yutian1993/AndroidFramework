@@ -27,5 +27,13 @@
     <string name="ssq_choose_period">Period</string>
     <string name="ssq_chhose_note">Notes</string>
 
-    <!-- -->
+    <!--Main item text-->
+    <string name="ssq_mainperiod_infor">Period %s Result</string>
+    <string name="ssq_mainperiod_time_infor">The lottery time: %s（%s）</string>
+    <string name="ssq_mainperiod_price_infor">First prize: %s Notes</string>
+    <string name="ssq_mainperiod_value_infor">Price: %s Yuan</string>
+    <string name="ssq_mainitem_more_text">More</string>
+    <string name="ssq_mainperiod_myprice_infor">My winning: % Notes</string>
+    <string name="ssq_mainperiod_myprice">Reward level: </string>
+
 </resources>

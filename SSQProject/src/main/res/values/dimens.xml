@@ -15,5 +15,7 @@
 
     <!-- -->
     <dimen name="infor_textsize">1sp</dimen>
+    <dimen name="ssq_kjqs_textsize">15sp</dimen>
+    <dimen name="ssq_jjxx_textsize">16sp</dimen>
 
 </resources>

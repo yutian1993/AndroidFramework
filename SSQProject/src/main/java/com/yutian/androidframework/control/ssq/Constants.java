@@ -37,4 +37,13 @@ public class Constants {
     public static final float INFORMATION_PADDUBG_RIGHT = 15;
     public static final float INFORMATION_PADDUBG_TOP = 10;
     public static final float INFORMATION_PADDUBG_BOTTOM = 10;
+
+    //
+    public static String G_MAINPERIOD_INFOR = "";
+    public static String G_MAINPERIOD_TIME_INFOR = "";
+    public static String G_MAINPERIOD_PRICE_INFOR = "";
+    public static String G_MAINPERIOD_PRICE_VAL_INFOR = "";
+    public static String G_MAINPERIOD_MOTE_TEXT = "";
+    public static String G_MAINPERIOD_MYPRICE_INFOR = "";
+    public static String G_MAINPERIOD_MYPRICE = "";
 }
