@@ -9,8 +9,8 @@ public class SSQTIMEINFOR {
     private String PERIOD;
     private java.util.Date LOTTERYTIME;
     private java.util.Date ENDTIME;
-    private java.util.Date PERIODSELL;
-    private java.util.Date CURRENPOOL;
+    private String PERIODSELL;
+    private String CURRENPOOL;
 
     public SSQTIMEINFOR() {
     }
@@ -19,7 +19,7 @@ public class SSQTIMEINFOR {
         this.PERIOD = PERIOD;
     }
 
-    public SSQTIMEINFOR(String PERIOD, java.util.Date LOTTERYTIME, java.util.Date ENDTIME, java.util.Date PERIODSELL, java.util.Date CURRENPOOL) {
+    public SSQTIMEINFOR(String PERIOD, java.util.Date LOTTERYTIME, java.util.Date ENDTIME, String PERIODSELL, String CURRENPOOL) {
         this.PERIOD = PERIOD;
         this.LOTTERYTIME = LOTTERYTIME;
         this.ENDTIME = ENDTIME;
@@ -51,19 +51,19 @@ public class SSQTIMEINFOR {
         this.ENDTIME = ENDTIME;
     }
 
-    public java.util.Date getPERIODSELL() {
+    public String getPERIODSELL() {
         return PERIODSELL;
     }
 
-    public void setPERIODSELL(java.util.Date PERIODSELL) {
+    public void setPERIODSELL(String PERIODSELL) {
         this.PERIODSELL = PERIODSELL;
     }
 
-    public java.util.Date getCURRENPOOL() {
+    public String getCURRENPOOL() {
         return CURRENPOOL;
     }
 
-    public void setCURRENPOOL(java.util.Date CURRENPOOL) {
+    public void setCURRENPOOL(String CURRENPOOL) {
         this.CURRENPOOL = CURRENPOOL;
     }
 

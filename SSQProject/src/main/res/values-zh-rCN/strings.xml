@@ -25,13 +25,23 @@
     <string name="ssq_chhose_note">注数</string>
 
     <!-- 主页面显示需要的字符串-->
-    <string name="ssq_mainperiod_infor">第%s期开奖结果</string>
-    <string name="ssq_mainperiod_time_infor">开奖时间：%s（%s）</string>
-    <string name="ssq_mainperiod_price_infor">一等奖：%s注</string>
-    <string name="ssq_mainperiod_value_infor">奖金：%s元</string>
-    <string name="ssq_mainitem_more_text">详情</string>
-    <string name="ssq_mainperiod_myprice_infor">我的中奖：%注</string>
-    <string name="ssq_mainperiod_myprice">奖励等级：</string>
+    <string name="ssq_mainperiod_infor" formatted="false">"第%1$s期开奖信息"</string>
+    <string name="ssq_mainperiod_time_infor" formatted="false">"开奖时间：%1$s（%2$s）"</string>
+    <string name="ssq_mainperiod_item_infor">结果：</string>
+    <string name="ssq_mainperiod_item__seq_infor">出球顺序：</string>
+    <string name="ssq_mainperiod_price_infor" formatted="false">"一等奖：%1$s注"</string>
+    <string name="ssq_mainperiod_value_infor" formatted="false">"奖金：%1$s元"</string>
+    <string name="ssq_mainitem_more_text" formatted="false">详情</string>
+    <string name="ssq_mainperiod_myprice_infor" formatted="false">"我的中奖：%1$s注"</string>
+    <string name="ssq_mainperiod_myprice" formatted="false">"奖励等级：%1$s元"</string>
+
+    <string name="ssq_week_one">星期天</string>
+    <string name="ssq_week_two">星期一</string>
+    <string name="ssq_week_three">星期二</string>
+    <string name="ssq_week_four">星期三</string>
+    <string name="ssq_week_five">星期四</string>
+    <string name="ssq_week_six">星期五</string>
+    <string name="ssq_week_seven">星期六</string>
 
 
 </resources>

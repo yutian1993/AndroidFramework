@@ -13,7 +13,6 @@ import java.util.List;
  */
 public class PerSSQDataModel extends SSQDataModel {
     private String period;
-    private String seqredball;
 
     public PerSSQDataModel() {
     }
@@ -26,14 +25,6 @@ public class PerSSQDataModel extends SSQDataModel {
         this.period = period;
     }
 
-    public String getSeqredball() {
-        return seqredball;
-    }
-
-    public void setSeqredball(String seqredball) {
-        this.seqredball = seqredball;
-    }
-
     /**
      * Convert db SSQPERIODDATA to PeriodSSQDataModel
      * @param periodData
@@ -42,16 +33,16 @@ public class PerSSQDataModel extends SSQDataModel {
     public static PerSSQDataModel
     convertPeriodSSQDataToPeriodSSQDataModel(SSQPERIODDATA periodData) {
         PerSSQDataModel newObj = new PerSSQDataModel();
-        newObj.period = periodData.getPERIOD();
-        newObj.red1 = periodData.getRED1();
-        newObj.red2 = periodData.getRED2();
-        newObj.red3 = periodData.getRED3();
-        newObj.red4 = periodData.getRED4();
-        newObj.red5 = periodData.getRED5();
-        newObj.red6 = periodData.getRED6();
-        newObj.blue = periodData.getBLUE();
-        newObj.redballs = periodData.getREDBALL();
-        newObj.seqredball = periodData.getSEQREDBALL();
+        newObj.setPeriod(periodData.getPERIOD());
+        newObj.setRed1(periodData.getRED1());
+        newObj.setRed2(periodData.getRED2());
+        newObj.setRed3(periodData.getRED3());
+        newObj.setRed4(periodData.getRED4());
+        newObj.setRed5(periodData.getRED5());
+        newObj.setRed6(periodData.getRED6());
+        newObj.setBlue(periodData.getBLUE());
+        newObj.setRedballs(periodData.getREDBALL());
+        newObj.setRedseqballs(periodData.getSEQREDBALL());
         return newObj;
     }
 

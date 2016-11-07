@@ -1,92 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/ssq_margin"
+    android:paddingRight="@dimen/ssq_margin"
+    android:background="@color/mainitem_background">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@android:color/transparent">
 
         <TextView
-            android:id="@+id/m_"
+            android:id="@+id/m_mainitem_periodresult"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:textSize="@dimen/ssq_kjqs_textsize"
-            android:text="第16130期开奖结果"/>
+            android:textSize="@dimen/ssq_kjqs_textsize" />
 
         <TextView
+            android:id="@+id/m_mainitem_periodtime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="@dimen/ssq_kjqs_textsize"
-            android:text="开奖时间：2016年10月12日（周四）"/>
-    </LinearLayout>
-
-    <com.yutian.androidframework.ui.layout.SSQResultLayout
-        android:id="@+id/m_ssq_item_result"
-        android:gravity="center_vertical"
-        android:layout_gravity="center_vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:overScrollMode="ifContentScrolls">
-
-    </com.yutian.androidframework.ui.layout.SSQResultLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="@dimen/ssq_jjxx_textsize"
-            android:text="一等奖：4注"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textSize="@dimen/ssq_jjxx_textsize"
-            android:text="奖金：1000,000,000元"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ssq_main_show_more"
-            android:textColor="@drawable/ssq_main_show_text_more"
-            android:text="详情"/>
+            android:textSize="@dimen/ssq_kjqs_textsize" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@android:color/transparent">
 
         <TextView
+            android:id="@+id/m_ssq_item_show"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text="@string/ssq_mainperiod_item_infor"
+            android:textSize="@dimen/ssq_jjxx_textsize" />
+
+        <com.yutian.androidframework.ui.layout.SSQResultLayout
+            android:id="@+id/m_ssq_item_result"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="ifContentScrolls"
+            android:background="@android:color/transparent">
+
+        </com.yutian.androidframework.ui.layout.SSQResultLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@android:color/transparent">
+
+        <TextView
+            android:id="@+id/m_mainitem_firstprice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="@dimen/ssq_jjxx_textsize"
-            android:textColor="@color/txt_titile_color"
-            android:text="我的中奖：4注"/>
+            android:textSize="@dimen/ssq_jjxx_textsize" />
 
         <TextView
+            android:id="@+id/m_mainitem_firstprice_val"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textSize="@dimen/ssq_jjxx_textsize"
-            android:text="奖励等级：1000,00元"/>
+            android:textSize="@dimen/ssq_jjxx_textsize" />
 
         <Button
+            android:id="@+id/m_mainitem__period_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/ssq_main_show_more"
             android:textColor="@drawable/ssq_main_show_text_more"
-            android:text="详情"/>
+            android:text="@string/ssq_mainitem_more_text"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@android:color/transparent">
+
+        <TextView
+            android:id="@+id/m_mainitem_myprice_infor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/ssq_jjxx_textsize" />
+
+        <TextView
+            android:id="@+id/m_mainitem_myprice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="@dimen/ssq_jjxx_textsize" />
+
+        <Button
+            android:id="@+id/m_mainitem_mymore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ssq_main_show_more"
+            android:textColor="@drawable/ssq_main_show_text_more"
+            android:text="@string/ssq_mainitem_more_text"/>
     </LinearLayout>
 
 

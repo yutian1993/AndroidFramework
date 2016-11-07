@@ -1,5 +1,8 @@
 package com.yutian.androidframework.control.ssq.ssqmodel;
 
+import com.yutian.base.database.srcgen.SSQTIMEINFOR;
+import com.yutian.base.util.DateUtil;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,10 +20,7 @@ public class PerInfoModel {
     String bqSell;
     String pricePool;
 
-    List<PerPriceNumModel> mPriceNumberModels;
-
     public PerInfoModel() {
-        mPriceNumberModels = new ArrayList<>();
     }
 
     public String getBqSell() {
@@ -63,18 +63,6 @@ public class PerInfoModel {
         this.kjTimeStr = kjTimeStr;
     }
 
-    public List<PerPriceNumModel> getPriceNumberModels() {
-        return mPriceNumberModels;
-    }
-
-    public void setPriceNumberModels(List<PerPriceNumModel> priceNumberModels) {
-        this.mPriceNumberModels = priceNumberModels;
-    }
-
-    public void addPriceNumberModel(PerPriceNumModel priceNumModel) {
-        mPriceNumberModels.add(priceNumModel);
-    }
-
     public String getPeriod() {
         return period;
     }
@@ -90,4 +78,38 @@ public class PerInfoModel {
     public void setPricePool(String pricePool) {
         this.pricePool = pricePool;
     }
+
+    /**
+     * 将数据库中DO对象转成Model
+     * @param ssqtimeinfor
+     * @return
+     */
+    public static PerInfoModel convertSSQTIMEINFORToPerInfoModel(SSQTIMEINFOR ssqtimeinfor) {
+        PerInfoModel newObj = new PerInfoModel();
+        newObj.setKjTime(ssqtimeinfor.getLOTTERYTIME());
+        newObj.setDjTime(ssqtimeinfor.getENDTIME());
+        newObj.setKjTimeStr(DateUtil.formatChineseDate(newObj.getKjTime()));
+        newObj.setDjTimeStr(DateUtil.formatChineseDate(newObj.getDjTime()));
+        newObj.setPeriod(ssqtimeinfor.getPERIOD());
+        newObj.setBqSell(ssqtimeinfor.getPERIODSELL());
+        newObj.setPricePool(ssqtimeinfor.getCURRENPOOL());
+        return newObj;
+    }
+
+    /**
+     * 将数据库中的数据转换成Model
+     * @param ssqtimeinfors
+     * @return
+     */
+    public static List<PerInfoModel> convertSSQTIMEINFORsToPerInfoModels(List<SSQTIMEINFOR> ssqtimeinfors) {
+        List<PerInfoModel> newObjs = new ArrayList<>();
+
+        for (SSQTIMEINFOR timeInfor : ssqtimeinfors) {
+            newObjs.add(convertSSQTIMEINFORToPerInfoModel(timeInfor));
+        }
+
+        return newObjs;
+    }
+
 }
+

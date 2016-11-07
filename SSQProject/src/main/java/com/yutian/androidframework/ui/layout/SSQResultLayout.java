@@ -2,7 +2,9 @@ package com.yutian.androidframework.ui.layout;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.RelativeLayout;
@@ -19,7 +21,7 @@ import java.util.List;
 /**
  * Created by wuwenchuan on 2016/10/15.
  */
-public class SSQResultLayout extends RelativeLayout {
+public class SSQResultLayout extends RelativeLayout implements View.OnClickListener {
 
     private ViewTreeObserver mViewTreeObserver;
     private SSQDataModel mSSQDataModel = null;
@@ -29,6 +31,15 @@ public class SSQResultLayout extends RelativeLayout {
     private int mHeight;
 
     private Context mContext;
+
+    //保存球体的size和Margin，以免重复计算
+    private boolean mNeedReCalc = true;
+    private int mBallSize = 0;
+    private int mBallMargin = 0;
+
+    //显示出球顺序的Click
+    private boolean mShowSequence = false;
+    private boolean mEnableClick = false;
 
     //为List分割线添加的对象
     private boolean mNeedSave = false;
@@ -47,6 +58,8 @@ public class SSQResultLayout extends RelativeLayout {
         super(context, attrs, defStyleAttr);
 
         initialize(context, attrs, defStyleAttr);
+
+        setOnClickListener(this);
     }
 
     public void initialize(Context context, AttributeSet attrs, int defStyleAttr) {
@@ -87,21 +100,27 @@ public class SSQResultLayout extends RelativeLayout {
         if (mSSQDataModel == null)
             return;
 
-        //Clean UI
+        //Clean UI(After calculator the ball size)
         removeAllViews();
 
-        List<String> redBalls = mSSQDataModel.getRedBallList();
+        List<String> redBalls = mShowSequence && mSSQDataModel.getRedBallSeqList().size() > 0 ?
+                mSSQDataModel.getRedBallSeqList() : mSSQDataModel.getRedBallList();
         List<String> blueBalls = mSSQDataModel.getBlueBallList();
 
         //draw objects
-        int ballMargin = DisplayUtil.dipToPx(mContext,  Constants.SSQ_BALL_MARGIN);
-        int ballsize = SSQUtil.cacluteBallSize(mContext, mWidth, mHeight, redBalls.size() + blueBalls.size()
-                , ballMargin);
+        if (mNeedReCalc) {
+            mBallMargin = DisplayUtil.dipToPx(mContext,  Constants.SSQ_BALL_MARGIN);;
+            mBallSize = SSQUtil.cacluteBallSize(mContext, mWidth, mHeight, redBalls.size() + blueBalls.size()
+                    , mBallMargin);
+            if (mNeedReCalc && mEnableClick)
+                mNeedReCalc = false;
+        }
+        int ballMargin = mBallMargin;
+        int ballsize = mBallSize;
 
         if (mLimitSize)
             if (ballsize > Constants.SSQ_MAX_SIZE)
                 ballsize = Constants.SSQ_MAX_SIZE;
-
 
         int topid = 0;
         int lastid = 0;
@@ -195,5 +214,30 @@ public class SSQResultLayout extends RelativeLayout {
 
     public void setLimitSize(boolean limitSize) {
         this.mLimitSize = limitSize;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (mEnableClick) {
+            if (mShowSequence) {
+                mShowSequence = false;
+                drawCustomize();
+                invalidate();
+            } else {
+                if (mSSQDataModel != null && mSSQDataModel.getRedBallSeqList().size() > 0) {
+                    mShowSequence = true;
+                    drawCustomize();
+                    invalidate();
+                }
+            }
+        }
+    }
+
+    public boolean isEnableClick() {
+        return mEnableClick;
+    }
+
+    public void setEnableClick(boolean enableClick) {
+        this.mEnableClick = enableClick;
     }
 }

@@ -38,12 +38,25 @@ public class Constants {
     public static final float INFORMATION_PADDUBG_TOP = 10;
     public static final float INFORMATION_PADDUBG_BOTTOM = 10;
 
-    //
-    public static String G_MAINPERIOD_INFOR = "";
-    public static String G_MAINPERIOD_TIME_INFOR = "";
-    public static String G_MAINPERIOD_PRICE_INFOR = "";
-    public static String G_MAINPERIOD_PRICE_VAL_INFOR = "";
-    public static String G_MAINPERIOD_MOTE_TEXT = "";
-    public static String G_MAINPERIOD_MYPRICE_INFOR = "";
-    public static String G_MAINPERIOD_MYPRICE = "";
+    //Main item information
+    public static String G_TXT_MAINPERIOD_INFOR = "";
+    public static String G_TXT_MAINPERIOD_TIME_INFOR = "";
+    public static String G_TXT_MAINPERIOD_PRICE_INFOR = "";
+    public static String G_TXT_MAINPERIOD_PRICE_VAL_INFOR = "";
+    public static String G_TXT_MAINPERIOD_MOTE_TEXT = "";
+    public static String G_TXT_MAINPERIOD_MYPRICE_INFOR = "";
+    public static String G_TXT_MAINPERIOD_MYPRICE = "";
+    public static int G_COLOR_MAINITEM_TXT;
+    public static int G_COLOR_MAINITEM_TXT_RED;
+    public static int G_COLOT_MAINITEM_TXT_FLASH_RED;
+    public static int G_COLOR_MAINITEM_TXT_GREEN;
+
+    //Time information
+    public static String G_SUNDAY="";
+    public static String G_MONDAY="";
+    public static String G_TUESDAY="";
+    public static String G_WEDNESDAY="";
+    public static String G_THURSDAY="";
+    public static String G_FRIDAY="";
+    public static String G_SATURDAY="";
 }

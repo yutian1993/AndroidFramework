@@ -25,6 +25,26 @@ public class SSQDataModel {
     protected List<String> blueBallList = new ArrayList<>();
 
     public SSQDataModel() {
+        init();
+    }
+
+    public SSQDataModel(SSQDataModel clone) {
+        init();
+        if (clone == null)
+            return;
+        this.setRed1(clone.getRed1());
+        this.setRed2(clone.getRed2());
+        this.setRed3(clone.getRed3());
+        this.setRed4(clone.getRed4());
+        this.setRed5(clone.getRed5());
+        this.setRed6(clone.getRed6());
+        this.setBlue(clone.getBlue());
+        this.setRedballs(clone.getRedballs());
+        this.setRedseqballs(clone.getRedseqballs());
+        this.setBlueballs(clone.getBlueballs());
+    }
+
+    private void init() {
         for (int index = 0; index < 6; ++index) {
             redBallList.add("0");
             redBallSeqList.add("0");
@@ -58,6 +78,7 @@ public class SSQDataModel {
         this.blueballs = blueballs;
 
         String[] balls = blueballs.split(" ");
+        blueBallList.clear();
         for (String ball :
                 balls) {
             blueBallList.add(ball);
@@ -131,6 +152,7 @@ public class SSQDataModel {
         this.redballs = redballs;
 
         String[] balls = redballs.split(" ");
+        redBallList.clear();
         for (String ball :
                 balls) {
             redBallList.add(ball);
@@ -150,6 +172,7 @@ public class SSQDataModel {
         this.redseqballs = redseqballs;
 
         String[] balls = redseqballs.split(" ");
+        redBallSeqList.clear();
         for (String ball :
                 balls) {
             redBallSeqList.add(ball);

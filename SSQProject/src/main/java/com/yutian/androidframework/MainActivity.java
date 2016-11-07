@@ -1,19 +1,24 @@
 package com.yutian.androidframework;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
+import com.yutian.androidframework.control.ssq.Constants;
+import com.yutian.androidframework.control.ssq.PeriodDataManager;
+import com.yutian.androidframework.control.ssq.impl.PeriodDataManagerImpl;
+import com.yutian.androidframework.control.ssq.ssqmodel.MainItemModel;
 import com.yutian.androidframework.control.ssq.ssqmodel.SSQDataModel;
 import com.yutian.androidframework.ui.layout.SSQResultLayout;
+import com.yutian.base.util.ssq.SSQUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView mRecyclerView;
 
     List<SSQDataModel> mData;
+
+    PeriodDataManager mPeriodDataManager = null;;
 
 //    HomeAdapter myAdapater;
 
@@ -35,12 +42,77 @@ public class MainActivity extends AppCompatActivity {
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
 
-//    @Bind(R.id.m_testButton)
+    public void generateViewInformation(Activity itemview) {
+        if (itemview == null)
+            return;
+
+        List<MainItemModel> search = mPeriodDataManager.getTopTenInfor(null);
+
+        if (search.size() > 0) {
+            MainItemModel temp = search.get(0);
+            ((TextView) itemview.findViewById(R.id.m_mainitem_periodresult))
+                    .setText(SSQUtil.setSSQMainItemColorSpannable(
+                            Constants.G_TXT_MAINPERIOD_INFOR,
+                            Constants.G_COLOR_MAINITEM_TXT,true,
+                            temp.getPeriod(), Constants.G_COLOT_MAINITEM_TXT_FLASH_RED));
+            ((TextView) itemview.findViewById(R.id.m_mainitem_periodtime))
+                    .setText(SSQUtil.setSSQMainItemColorSpannable(
+                            Constants.G_TXT_MAINPERIOD_TIME_INFOR,
+                            Constants.G_COLOR_MAINITEM_TXT,true,
+                            temp.getPeriodTime(), Constants.G_COLOT_MAINITEM_TXT_FLASH_RED,
+                            temp.getPeriodWeek(), null));
+            ((TextView) itemview.findViewById(R.id.m_mainitem_firstprice))
+                    .setText(SSQUtil.setSSQMainItemColorSpannable(
+                            Constants.G_TXT_MAINPERIOD_PRICE_INFOR,
+                            Constants.G_COLOR_MAINITEM_TXT, true,
+                            temp.getFirstPricenNum(), Constants.G_COLOT_MAINITEM_TXT_FLASH_RED));
+            ((TextView) itemview.findViewById(R.id.m_mainitem_firstprice_val))
+                    .setText(SSQUtil.setSSQMainItemColorSpannable(
+                            Constants.G_TXT_MAINPERIOD_PRICE_VAL_INFOR,
+                            Constants.G_COLOR_MAINITEM_TXT, true,
+                            temp.getFirstPriceVal(), Constants.G_COLOT_MAINITEM_TXT_FLASH_RED));
+            ((TextView) itemview.findViewById(R.id.m_mainitem_myprice_infor))
+                    .setText(SSQUtil.setSSQMainItemColorSpannable(
+                            Constants.G_TXT_MAINPERIOD_MYPRICE_INFOR,
+                            Constants.G_COLOR_MAINITEM_TXT, true,
+                            temp.getMyPriceNum(),Constants.G_COLOT_MAINITEM_TXT_FLASH_RED));
+            ((TextView) itemview.findViewById(R.id.m_mainitem_myprice))
+                    .setText(SSQUtil.setSSQMainItemColorSpannable(
+                            Constants.G_TXT_MAINPERIOD_MYPRICE,
+                            Constants.G_COLOR_MAINITEM_TXT, true,
+                            temp.getMyPriceVal(),Constants.G_COLOT_MAINITEM_TXT_FLASH_RED));
+
+            //SSQData
+            SSQResultLayout ssqui = ((SSQResultLayout) findViewById(R.id.m_ssq_item_result));
+            ssqui.setLimitSize(true);
+            ssqui.setmSSQDataModel(temp);
+            ssqui.setEnableClick(true);
+        }
+
+
+//        ((TextView) itemview.findViewById(R.id.m_mainitem_periodresult))
+//                .setText(String.format(Constants.G_TXT_MAINPERIOD_INFOR, "16130"));
+//        ((TextView) itemview.findViewById(R.id.m_mainitem_periodtime))
+//                .setText(String.format(Constants.G_TXT_MAINPERIOD_TIME_INFOR, "2016年10月12日", "周四"));
+//        ((TextView) itemview.findViewById(R.id.m_mainitem_firstprice))
+//                .setText(String.format(Constants.G_TXT_MAINPERIOD_PRICE_INFOR, "1"));
+//        ((TextView) itemview.findViewById(R.id.m_mainitem_firstprice_val))
+//                .setText(String.format(Constants.G_TXT_MAINPERIOD_PRICE_VAL_INFOR, "1000,000"));
+//        ((TextView) itemview.findViewById(R.id.m_mainitem_myprice_infor))
+//                .setText(String.format(Constants.G_TXT_MAINPERIOD_MYPRICE_INFOR, "2"));
+//        ((TextView) itemview.findViewById(R.id.m_mainitem_myprice))
+//                .setText(String.format(Constants.G_TXT_MAINPERIOD_MYPRICE, "1000,00"));
+    }
+
+    //    @Bind(R.id.m_testButton)
 //    UIButton m_testButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mPeriodDataManager = new PeriodDataManagerImpl(this);
         setContentView(R.layout.ssq_main_show_item);
+        generateViewInformation(this);
+
 
 //        ButterKnife.bind(this);
 //
@@ -57,12 +129,9 @@ public class MainActivity extends AppCompatActivity {
 //        mRecyclerView.setAdapter(myAdapater = new HomeAdapter());
 
 
-
 //        new Handler().postDelayed(new Runnable() {
 //            @Override
 //            public void run() {
-
-
 
 
 //
@@ -70,20 +139,21 @@ public class MainActivity extends AppCompatActivity {
 //                if (animator == null)
 //                    System.out.println("Null information");
 //                animator.start();
-                SSQDataModel mSSQDataModel = new SSQDataModel();
-                List<String> reDballs = new ArrayList<>();
-                reDballs.add("01");
-                reDballs.add("06");
-                reDballs.add("07");
-                reDballs.add("09");
-                reDballs.add("33");
-                List<String> blueballs = new ArrayList<>();
-                blueballs.add("09");
-                mSSQDataModel.setRedBallList(reDballs);
-                mSSQDataModel.setBlueBallList(blueballs);
-        SSQResultLayout temp = ((SSQResultLayout)findViewById(R.id.m_ssq_item_result));
-        temp.setLimitSize(true);
-        temp.setmSSQDataModel(mSSQDataModel);
+//        SSQDataModel mSSQDataModel = new SSQDataModel();
+//        List<String> reDballs = new ArrayList<>();
+//        reDballs.add("01");
+//        reDballs.add("06");
+//        reDballs.add("07");
+//        reDballs.add("09");
+//        reDballs.add("33");
+//        List<String> blueballs = new ArrayList<>();
+//        blueballs.add("09");
+//        mSSQDataModel.setRedBallList(reDballs);
+//        mSSQDataModel.setBlueBallList(blueballs);
+//        SSQResultLayout temp = ((SSQResultLayout) findViewById(R.id.m_ssq_item_result));
+//        temp.setLimitSize(true);
+//        temp.setmSSQDataModel(mSSQDataModel);
+//        generateViewInformation(this);
 //
 //                ObjectAnimator nopeAnimator = AnimationUtil.nope(view, DisplayUtil.dipToPx(view.getContext(), 5));
 //                nopeAnimator.setRepeatCount(ValueAnimator.INFINITE);
@@ -148,7 +218,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    protected  void initdata() {
+    protected void initdata() {
 //        mData = new ArrayList<>();
 //        SSQDataModel mSSQDataModel = new SSQDataModel();
 //        List<String> reDballs = new ArrayList<>();

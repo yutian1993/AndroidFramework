@@ -4,12 +4,16 @@ import android.content.Context;
 
 import com.yutian.androidframework.SSQApplication;
 import com.yutian.androidframework.control.ssq.Constants;
+import com.yutian.androidframework.control.ssq.ssqmodel.PerInfoModel;
+import com.yutian.androidframework.control.ssq.ssqmodel.PerPriceNumModel;
 import com.yutian.androidframework.control.ssq.ssqmodel.PerSSQDataModel;
 import com.yutian.base.database.srcgen.DaoSession;
+import com.yutian.base.database.srcgen.SSQNUMBERWINNER;
 import com.yutian.base.database.srcgen.SSQNUMBERWINNERDao;
 import com.yutian.base.database.srcgen.SSQPERIODDATA;
 import com.yutian.base.database.srcgen.SSQPERIODDATADao;
 import com.yutian.base.database.srcgen.SSQPERIODSTATUSDao;
+import com.yutian.base.database.srcgen.SSQTIMEINFOR;
 import com.yutian.base.database.srcgen.SSQTIMEINFORDao;
 
 import java.util.List;
@@ -70,5 +74,40 @@ public class PeriodDataControl {
         queryBuilder.orderDesc(SSQPERIODDATADao.Properties.PERIOD);
         List<SSQPERIODDATA> mListVals = queryBuilder.list();
         return PerSSQDataModel.convertPeriodSSQDatasToPeriodSSQDataModels(mListVals);
+    }
+
+    /**
+     * 根据指定的ID获取相关的时间信息
+     * @param period
+     * @return
+     */
+    public PerInfoModel getPeriodInformationFromPeriod(String period) {
+        QueryBuilder queryBuilder = mSSQTimeInforDao.queryBuilder();
+        queryBuilder.where(SSQTIMEINFORDao.Properties.PERIOD.eq(period));
+
+        List<SSQTIMEINFOR> results = queryBuilder.list();
+
+        if (results.size() == 0)
+            return null;
+
+        return PerInfoModel.convertSSQTIMEINFORToPerInfoModel(results.get(0));
+    }
+
+    /**
+     * 获得某一期的中奖信息
+     * @param period
+     * @return
+     */
+    public List<PerPriceNumModel> getPeriodPriceNumFromPeriod(String period) {
+        QueryBuilder queryBuilder = mSSQNumWinnerDao.queryBuilder();
+        queryBuilder.where(SSQNUMBERWINNERDao.Properties.PERIOD.eq(period));
+        queryBuilder.orderAsc(SSQNUMBERWINNERDao.Properties.PRICELEVEL);
+
+        List<SSQNUMBERWINNER> results = queryBuilder.list();
+
+        if (results.size() == 0)
+            return null;
+
+        return PerPriceNumModel.convertSSQNUMBERWINNERsToPerPriceNumModels(results);
     }
 }

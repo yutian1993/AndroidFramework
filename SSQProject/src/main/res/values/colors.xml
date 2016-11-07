@@ -46,6 +46,12 @@
     <color name="txt_content_color">#FFcccc</color>
     <color name="txt_content_none_color">#99cc00</color>
 
+    <color name="mainitem_background">#96c8bda7</color>
+    <color name="mainitem_txt_color">#fa75482b</color>
+    <color name="mainitem_txt_red_color">#a9171a</color>
+    <color name="mainitem_txt_flashred_color">#e51c24</color>
+    <color name="mainitem_txt_green_color">#84c136</color>
+
 
     <!-- 颜色大全 -->
     <color name="white">#FFFFFF</color><!--白色-->

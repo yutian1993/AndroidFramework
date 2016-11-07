@@ -28,12 +28,22 @@
     <string name="ssq_chhose_note">Notes</string>
 
     <!--Main item text-->
-    <string name="ssq_mainperiod_infor">Period %s Result</string>
-    <string name="ssq_mainperiod_time_infor">The lottery time: %s（%s）</string>
-    <string name="ssq_mainperiod_price_infor">First prize: %s Notes</string>
-    <string name="ssq_mainperiod_value_infor">Price: %s Yuan</string>
+    <string name="ssq_mainperiod_infor" formatted="false">"Period %1$s Result"</string>
+    <string name="ssq_mainperiod_time_infor" formatted="false">"The lottery time: %1$s(%2$s)"</string>
+    <string name="ssq_mainperiod_item_infor">Result: </string>
+    <string name="ssq_mainperiod_item__seq_infor">Sequence: </string>
+    <string name="ssq_mainperiod_price_infor" formatted="false">"First prize: %1$s Notes"</string>
+    <string name="ssq_mainperiod_value_infor" formatted="false">"Price: %1$s Yuan"</string>
     <string name="ssq_mainitem_more_text">More</string>
-    <string name="ssq_mainperiod_myprice_infor">My winning: % Notes</string>
-    <string name="ssq_mainperiod_myprice">Reward level: </string>
+    <string name="ssq_mainperiod_myprice_infor" formatted="false">"My winning: %1$s Notes"</string>
+    <string name="ssq_mainperiod_myprice" formatted="false">"Reward level: %1$s Yuan"</string>
+
+    <string name="ssq_week_one">SUNDAY</string>
+    <string name="ssq_week_two">MONDAY</string>
+    <string name="ssq_week_three">TUESDAY</string>
+    <string name="ssq_week_four">WEDNESDAY</string>
+    <string name="ssq_week_five">THURSDAY</string>
+    <string name="ssq_week_six">FRIDAY</string>
+    <string name="ssq_week_seven">SATURDAY</string>
 
 </resources>
