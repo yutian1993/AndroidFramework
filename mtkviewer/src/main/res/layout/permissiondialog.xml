@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/permission_dialog_top_round_rect_shape"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_permission_content"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="6sp"
+
+            android:textColor="@color/le_permission_dialog_content_text_color"
+            android:textColorLink="@color/le_permission_dialog_text_blue_color"
+            android:textSize="14sp"
+            android:gravity="center_horizontal"
+            android:paddingTop="18dp"
+            android:paddingBottom="18dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"/>
+
+    </LinearLayout>
+    <View
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="@color/le_permission_dialog_divider_color" />
+
+    <Button
+        android:id="@+id/btn_set_permission"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="?android:attr/selectableItemBackground"
+        android:text="Settings"
+        android:textColor="@color/le_permission_dialog_text_blue_color"
+        android:textSize="18sp"
+    />
+
+    <View
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_width="fill_parent"
+        android:layout_height="1px"
+        android:background="@color/le_permission_dialog_divider_color" />
+    <Button
+        android:id="@+id/btn_cancel_permission"
+        android:paddingTop="14dp"
+        android:paddingBottom="14dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="?android:attr/selectableItemBackground"
+        android:text="Exit"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        />
+</LinearLayout>

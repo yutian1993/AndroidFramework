@@ -1,1 +1,1 @@
-include ':SSQProject', ':libjavahelp', ':libjavafunctiontest'
+include ':SSQProject', ':libjavahelp', ':libjavafunctiontest', ':exceptiontext', ':mtkviewer', ':utillib'
