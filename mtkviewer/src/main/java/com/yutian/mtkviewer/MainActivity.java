@@ -5,46 +5,70 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.yutian.mtkviewer.adapter.TreeItemAdapter;
 import com.yutian.mtkviewer.config.AppValues;
 import com.yutian.mtkviewer.dbcontrol.DBConfigController;
+import com.yutian.mtkviewer.dbcontrol.TreeItemController;
+import com.yutian.mtkviewer.dbcontrol.greendao.TreeItem;
+import com.yutian.mtkviewer.decoration.FloatingBarItemDecoration;
+import com.yutian.mtkviewer.decoration.LineDecoration;
+import com.yutian.mtkviewer.widget.IndexBar;
 import com.yutian.utillib.CommonUtil.FileUtil;
 import com.yutian.utillib.CommonUtil.SharedPreferenceUtil;
 import com.yutian.utillib.CommonUtil.SqliteDataUtil;
 
-import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private Context m_context;
+    private Context mContext;
+
+    @Bind(R.id.m_recycleerview_list)
+    RecyclerView mRecyclerView;
+    private TreeItemAdapter mTreeItemAdapter = null;
+    private TreeItemController mTreeItemController = null;
+
+    private LinkedHashMap<String, String> mHeaderList;
+    private LinearLayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ButterKnife.bind(this);
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -66,7 +90,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        m_context = this;
+        mContext = this;
         initValue();
     }
 
@@ -78,33 +102,73 @@ public class MainActivity extends AppCompatActivity
             ((NavigationView) findViewById(R.id.nav_view)).getMenu().findItem(R.id.nav_database).setTitle("No DataBase.");
         }
 
-//        if (!hasPermission())
-//            requestAllPermissions();
+        if (!hasPermission())
+            requestAllPermissions();
+        else {
+            DBConfigController.getInstance(this);
+            mTreeItemController = TreeItemController.getInstance(this);
+
+//            IndexBar indexBar = (IndexBar) findViewById(R.id.share_add_contact_sidebar);
+//            indexBar.setNavigators(new ArrayList<>(mHeaderList.values()));
+//            indexBar.setOnTouchingLetterChangedListener(new IndexBar.OnTouchingLetterChangeListener() {
+//                @Override
+//                public void onTouchingLetterChanged(String s) {
+////                showLetterHintDialog(s);
+////                for (String position : mHeaderList.keySet()) {
+////                    if (mHeaderList.get(position).equals(s)) {
+////                        mLayoutManager.scrollToPositionWithOffset(position, 0);
+////                        return;
+////                    }
+////                }
+//                }
+//
+//                @Override
+//                public void onTouchingStart(String s) {
+////                showLetterHintDialog(s);
+//                }
+//
+//                @Override
+//                public void onTouchingEnd(String s) {
+////                hideLetterHintDialog();
+//                }
+//            });
+        }
+    }
+
+    public void generateList() {
+        fetchData();
+
+        mRecyclerView.setLayoutManager(mLayoutManager = new LinearLayoutManager(this));
+        mRecyclerView.addItemDecoration(
+                new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        mRecyclerView.addItemDecoration(
+                new FloatingBarItemDecoration(this, mHeaderList));
     }
 
     public void requestAllPermissions() {
-        requestPermission(AppValues.PERMISSION_MOUNT_UNMOUNT_FILESYSTEMS, Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS, new Runnable() {
-            @Override
-            public void run() {
-                requestPermission(AppValues.PERMISSION_WRITE_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, new Runnable() {
-                    @Override
-                    public void run() {
-                        //ConfigControl需要提前初始化
-                        DBConfigController.getInstance(m_context);
-                    }
-                }, new Runnable() {
-                    @Override
-                    public void run() {
-                        //Nothing
-                    }
-                });
-            }
-        }, new Runnable() {
-            @Override
-            public void run() {
-                //Nothing
-            }
-        });
+        ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,}, AppValues.PERMISSION_WRITE_EXTERNAL_STORAGE);
+//        requestPermission(AppValues.PERMISSION_MOUNT_UNMOUNT_FILESYSTEMS, Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS, new Runnable() {
+//            @Override
+//            public void run() {
+//                requestPermission(AppValues.PERMISSION_WRITE_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE, new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        //ConfigControl需要提前初始化
+//                        DBConfigController.getInstance(mContext);
+//                    }
+//                }, new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        //Nothing
+//                    }
+//                });
+//            }
+//        }, new Runnable() {
+//            @Override
+//            public void run() {
+//                //Nothing
+//            }
+//        });
     }
 
     @Override
@@ -145,13 +209,44 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            if (!hasPermission())
-                requestAllPermissions();
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_swlist) {
+            if (mTreeItemController != null) {
+                List<TreeItem> mDatas = new ArrayList<>();
+                Iterator<String> key = mHeaderList.keySet().iterator();
+                while (key.hasNext()) {
+                    String keyID = key.next();
+                    mDatas.addAll(mTreeItemController.getSecondTreeByParent(keyID));
+                }
 
-        } else if (id == R.id.nav_slideshow) {
+                if (mTreeItemAdapter == null) {
+                    mTreeItemAdapter = new TreeItemAdapter(LayoutInflater.from(this),null);
+                    mTreeItemAdapter.setOnTreeItemClickListener(new TreeItemAdapter.OnTreeItemClickListener() {
+                        @Override
+                        public void onTreeItemClicked(TreeItem item) {
+                            Snackbar.make(mRecyclerView, "Clicked " + item.getNAME(), Snackbar.LENGTH_SHORT).show();
+                        }
+                    });
+                    mRecyclerView.setAdapter(mTreeItemAdapter);
+                }
+                mTreeItemAdapter.setNewData(mDatas);
+                mTreeItemAdapter.notifyDataSetChanged();
+                mRecyclerView.invalidate();
 
+            } else {
+                Toast.makeText(this, "No database show!", Toast.LENGTH_SHORT).show();
+            }
+        } else if (id == R.id.nav_hw) {
+            if (mTreeItemController != null) {
+                mTreeItemController.getFirstTreeByTopParent("HW");
+            } else {
+                Toast.makeText(this, "No database show!", Toast.LENGTH_SHORT).show();
+            }
+        } else if (id == R.id.nav_functiontest) {
+            if (mTreeItemController != null) {
+                mTreeItemController.getSecondTreeByParent(null);
+            } else {
+                Toast.makeText(this, "No database show!", Toast.LENGTH_SHORT).show();
+            }
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_database) {
@@ -176,6 +271,11 @@ public class MainActivity extends AppCompatActivity
                 if (SqliteDataUtil.isSqliteDB(uri.getPath())) {
                     SharedPreferenceUtil.saveDBPath(this, uri.getPath());
                     ((NavigationView) findViewById(R.id.nav_view)).getMenu().findItem(R.id.nav_database).setTitle("DataBase：" + FileUtil.getFileName(uri.getPath(), null));
+
+                    //Update DB
+                    DBConfigController.getInstance(this);
+                    mTreeItemController = TreeItemController.getInstance(this);
+                    generateList();
                 } else {
                     System.out.println("No SqliteDB");
                 }
@@ -234,28 +334,74 @@ public class MainActivity extends AppCompatActivity
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
+        System.out.println("Result size: " + grantResults.length);
+        for (int result : grantResults) {
+            System.out.println("Result: " + result);
+        }
+
+        System.out.println("PackageManager.PERMISSION_GRANTED: " + PackageManager.PERMISSION_GRANTED);
+
         if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            Runnable allowRun = allowablePermissionRunnables.get(requestCode);
-            allowRun.run();
-            allowablePermissionRunnables.remove(requestCode);
+            //ConfigControl需要提前初始化
+            DBConfigController.getInstance(mContext);
+            mTreeItemController = TreeItemController.getInstance(this);
+//            Runnable allowRun = allowablePermissionRunnables.get(requestCode);
+//            allowRun.run();
+//            allowablePermissionRunnables.remove(requestCode);
         } else {
 //            Runnable disallowRun = disallowablePermissionRunnables.get(requestCode);
 //            disallowRun.run();
 //            this.finish();
-            System.out.println("No grant");
+//            System.out.println("No grant");
+            this.finish();
         }
     }
 
     private boolean hasPermission() {
         String[] permissionList = new String[]{
-                Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE};
         boolean result = true;
         for (String permission : permissionList) {
             if (ActivityCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                System.out.println(permission + " not PERMISSION_GRANTED");
                 result = false;
             }
         }
         return result;
+    }
+
+
+    private void fetchData() {
+        mHeaderList = new LinkedHashMap<>();
+        fetchContactList();
+    }
+
+    protected void fetchContactList() {
+        preOperation();
+    }
+
+
+    /**
+     * calculate the TAG and add to {@Link #mHeaderlist}
+     */
+    private void preOperation() {
+        mHeaderList.clear();
+        List<TreeItem> mDatas = mTreeItemController.getFirstTreeByTopParent(null);
+        for (TreeItem item : mDatas) {
+            addHeaderToList(item.getFARID(), item.getNAME());
+        }
+//        if (mContactList.size() == 0) {
+//            return;
+//        }
+//        addHeaderToList(0, mContactList.get(0).getInitial());
+//        for (int i = 2; i < mContactList.size(); i++) {
+//            if (!mContactList.get(i - 1).getInitial().equalsIgnoreCase(mContactList.get(i).getInitial())) {
+//                addHeaderToList(i, mContactList.get(i).getInitial());
+//            }
+//        }
+    }
+
+    private void addHeaderToList(String index, String header) {
+        mHeaderList.put(index, header);
     }
 }

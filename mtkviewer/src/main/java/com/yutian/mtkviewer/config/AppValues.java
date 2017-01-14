@@ -8,4 +8,6 @@ public class AppValues {
 
     public static int PERMISSION_WRITE_EXTERNAL_STORAGE = 10;
     public static int PERMISSION_MOUNT_UNMOUNT_FILESYSTEMS = 11;
+
+    public static int DB_QUERY_LIMIT_COUNTS = 20;
 }

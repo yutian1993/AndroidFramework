@@ -12,8 +12,25 @@
     tools:context="com.yutian.mtkviewer.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/m_recycleerview_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:overScrollMode="never">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <com.yutian.mtkviewer.widget.IndexBar
+        android:id="@+id/share_add_contact_sidebar"
+        android:layout_width="16dp"
         android:layout_height="wrap_content"
-        android:text="Hello World!" />
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        app:focusLetterColor="@color/indexbar_letter_color"
+        app:letterColor="@color/indexbar_letter_color"
+        app:letterSize="10sp"
+        app:letterSpacingExtra="1.4" />
+
 </RelativeLayout>
