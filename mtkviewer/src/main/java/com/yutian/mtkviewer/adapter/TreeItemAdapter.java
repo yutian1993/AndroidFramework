@@ -40,7 +40,7 @@ public class TreeItemAdapter extends RecyclerView.Adapter {
         TreeItem item = mDatalist.get(position);
 
         if (holder instanceof RecycleViewHolder) {
-            ((RecycleViewHolder)holder).bindItem(item);
+            ((RecycleViewHolder) holder).bindItem(item);
         } else {
             throw new IllegalStateException("Illegal state Exception onBindviewHolder");
         }
@@ -59,7 +59,7 @@ public class TreeItemAdapter extends RecyclerView.Adapter {
 
         public RecycleViewHolder(View itemView) {
             super(itemView);
-            mTextView = (TextView)itemView.findViewById(R.id.list_item_name);
+            mTextView = (TextView) itemView.findViewById(R.id.list_item_name);
         }
 
         void bindItem(final TreeItem treeItem) {
@@ -87,4 +87,20 @@ public class TreeItemAdapter extends RecyclerView.Adapter {
         return true;
     }
 
+    public boolean addMoreData(List<TreeItem> data) {
+        if (mDatalist == null) {
+            mDatalist = new ArrayList<>();
+        }
+        return mDatalist.addAll(data);
+    }
+
+    public String getItemID(int position) {
+        if (mDatalist == null)
+            return null;
+
+        if (position < 0 || position >= getItemCount()) {
+            return mDatalist.get(getItemCount() - 1).getFARID();
+        } else
+            return mDatalist.get(position).getFARID();
+    }
 }

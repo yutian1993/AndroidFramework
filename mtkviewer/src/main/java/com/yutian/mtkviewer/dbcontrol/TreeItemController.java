@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.yutian.mtkviewer.MtkHelperApplication;
 import com.yutian.mtkviewer.config.AppValues;
+import com.yutian.mtkviewer.dbcontrol.greendao.FARITEM;
+import com.yutian.mtkviewer.dbcontrol.greendao.FARITEMDao;
 import com.yutian.mtkviewer.dbcontrol.greendao.TreeItem;
 import com.yutian.mtkviewer.dbcontrol.greendao.TreeItemDao;
 
@@ -18,6 +20,7 @@ public class TreeItemController {
 
     private static TreeItemController gTreeItemCongroller = null;
     private static TreeItemDao gTreeItemDao = null;
+    private static FARITEMDao getFARIDDao = null;
     private static Context gAppContext = null;
 
     /**
@@ -36,6 +39,7 @@ public class TreeItemController {
                     if (MtkHelperApplication.getDaoSession(gAppContext) != null) {
                         gTreeItemCongroller = new TreeItemController();
                         gTreeItemDao = MtkHelperApplication.getDaoSession(gAppContext).getTreeItemDao();
+                        getFARIDDao = MtkHelperApplication.getDaoSession(gAppContext).getFARITEMDao();
                     }
 
                 }
@@ -119,4 +123,19 @@ public class TreeItemController {
 
         return mListVals;
     }
+
+    public FARITEM getItemByItemID(String id) {
+        if (id == null)
+            return null;
+
+        QueryBuilder queryBuilder = getFARIDDao.queryBuilder();
+        queryBuilder.where(FARITEMDao.Properties.FAQID.eq(id));
+        List<FARITEM> mListVals = queryBuilder.list();
+
+        if (mListVals.size() == 0)
+            return null;
+
+        return mListVals.get(0);
+    }
+
 }

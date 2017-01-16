@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '23.0.1'
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         applicationId "com.yutian.mtkviewer"
@@ -27,5 +27,6 @@ dependencies {
     compile 'com.android.support:design:25.1.0'
     compile rootProject.ext.butterknife
     compile rootProject.ext.greendao
+    compile rootProject.ext.picasso
     compile project(':utillib')
 }

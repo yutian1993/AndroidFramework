@@ -44,9 +44,9 @@ public class FloatingBarItemDecoration extends RecyclerView.ItemDecoration {
      * (the position of the view in original adapter's list)
      * String means the title to be drawn
      */
-    private Map<String, String> mList;
+    private Map<Integer, String> mList;
 
-    public FloatingBarItemDecoration(Context context, Map<String, String> list) {
+    public FloatingBarItemDecoration(Context context, Map<Integer, String> list) {
         this.mContext = context;
         Resources resources = mContext.getResources();
         this.mList = list;

@@ -1,4 +1,4 @@
-package com.yutian.mtkviewer;
+package com.yutian.mtkviewer.activity;
 
 import android.Manifest;
 import android.app.Activity;
@@ -26,21 +26,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.yutian.mtkviewer.R;
 import com.yutian.mtkviewer.adapter.TreeItemAdapter;
 import com.yutian.mtkviewer.config.AppValues;
 import com.yutian.mtkviewer.dbcontrol.DBConfigController;
 import com.yutian.mtkviewer.dbcontrol.TreeItemController;
 import com.yutian.mtkviewer.dbcontrol.greendao.TreeItem;
 import com.yutian.mtkviewer.decoration.FloatingBarItemDecoration;
-import com.yutian.mtkviewer.decoration.LineDecoration;
-import com.yutian.mtkviewer.widget.IndexBar;
 import com.yutian.utillib.CommonUtil.FileUtil;
 import com.yutian.utillib.CommonUtil.SharedPreferenceUtil;
 import com.yutian.utillib.CommonUtil.SqliteDataUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,7 +56,7 @@ public class MainActivity extends AppCompatActivity
     private TreeItemAdapter mTreeItemAdapter = null;
     private TreeItemController mTreeItemController = null;
 
-    private LinkedHashMap<String, String> mHeaderList;
+    private LinkedHashMap<Integer, String> mHeaderList;
     private LinearLayoutManager mLayoutManager;
 
     @Override
@@ -107,31 +105,6 @@ public class MainActivity extends AppCompatActivity
         else {
             DBConfigController.getInstance(this);
             mTreeItemController = TreeItemController.getInstance(this);
-
-//            IndexBar indexBar = (IndexBar) findViewById(R.id.share_add_contact_sidebar);
-//            indexBar.setNavigators(new ArrayList<>(mHeaderList.values()));
-//            indexBar.setOnTouchingLetterChangedListener(new IndexBar.OnTouchingLetterChangeListener() {
-//                @Override
-//                public void onTouchingLetterChanged(String s) {
-////                showLetterHintDialog(s);
-////                for (String position : mHeaderList.keySet()) {
-////                    if (mHeaderList.get(position).equals(s)) {
-////                        mLayoutManager.scrollToPositionWithOffset(position, 0);
-////                        return;
-////                    }
-////                }
-//                }
-//
-//                @Override
-//                public void onTouchingStart(String s) {
-////                showLetterHintDialog(s);
-//                }
-//
-//                @Override
-//                public void onTouchingEnd(String s) {
-////                hideLetterHintDialog();
-//                }
-//            });
         }
     }
 
@@ -211,39 +184,21 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_swlist) {
             if (mTreeItemController != null) {
-                List<TreeItem> mDatas = new ArrayList<>();
-                Iterator<String> key = mHeaderList.keySet().iterator();
-                while (key.hasNext()) {
-                    String keyID = key.next();
-                    mDatas.addAll(mTreeItemController.getSecondTreeByParent(keyID));
-                }
-
-                if (mTreeItemAdapter == null) {
-                    mTreeItemAdapter = new TreeItemAdapter(LayoutInflater.from(this),null);
-                    mTreeItemAdapter.setOnTreeItemClickListener(new TreeItemAdapter.OnTreeItemClickListener() {
-                        @Override
-                        public void onTreeItemClicked(TreeItem item) {
-                            Snackbar.make(mRecyclerView, "Clicked " + item.getNAME(), Snackbar.LENGTH_SHORT).show();
-                        }
-                    });
-                    mRecyclerView.setAdapter(mTreeItemAdapter);
-                }
-                mTreeItemAdapter.setNewData(mDatas);
-                mTreeItemAdapter.notifyDataSetChanged();
-                mRecyclerView.invalidate();
-
+                this.setTitle(R.string.title_software);
+                generateDataList("SW");
             } else {
                 Toast.makeText(this, "No database show!", Toast.LENGTH_SHORT).show();
             }
         } else if (id == R.id.nav_hw) {
             if (mTreeItemController != null) {
-                mTreeItemController.getFirstTreeByTopParent("HW");
+                this.setTitle(R.string.title_hardware);
+                generateDataList("HW");
             } else {
                 Toast.makeText(this, "No database show!", Toast.LENGTH_SHORT).show();
             }
         } else if (id == R.id.nav_functiontest) {
             if (mTreeItemController != null) {
-                mTreeItemController.getSecondTreeByParent(null);
+                Toast.makeText(this, "Function remain!!", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(this, "No database show!", Toast.LENGTH_SHORT).show();
             }
@@ -277,18 +232,10 @@ public class MainActivity extends AppCompatActivity
                     mTreeItemController = TreeItemController.getInstance(this);
                     generateList();
                 } else {
-                    System.out.println("No SqliteDB");
+                    Snackbar.make(mRecyclerView, "You choose is not a sqlite database!", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
                 }
-//                System.out.println(uri.getPath());
             }
-//            //得到uri，后面就是将uri转化成file的过程。
-//            String[] proj = {MediaStore.Images.Media.DATA};
-//            Cursor actualimagecursor = managedQuery(uri, proj, null, null, null);
-//            int actual_image_column_index = actualimagecursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-//            actualimagecursor.moveToFirst();
-//            String img_path = actualimagecursor.getString(actual_image_column_index);
-//            File file = new File(img_path);
-//            Toast.makeText(MainActivity.this, file.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -373,35 +320,37 @@ public class MainActivity extends AppCompatActivity
 
     private void fetchData() {
         mHeaderList = new LinkedHashMap<>();
-        fetchContactList();
     }
 
-    protected void fetchContactList() {
-        preOperation();
-    }
-
-
-    /**
-     * calculate the TAG and add to {@Link #mHeaderlist}
-     */
-    private void preOperation() {
-        mHeaderList.clear();
-        List<TreeItem> mDatas = mTreeItemController.getFirstTreeByTopParent(null);
-        for (TreeItem item : mDatas) {
-            addHeaderToList(item.getFARID(), item.getNAME());
+    private void generateDataList(String kind) {
+        List<TreeItem> headerList = mTreeItemController.getFirstTreeByTopParent(kind);
+        int headIndex = 0;
+        List<TreeItem> dataList = new ArrayList<>();
+        for (TreeItem item : headerList) {
+            List<TreeItem> itemList = mTreeItemController.getSecondTreeByParent(item.getFARID());
+            if (mHeaderList == null)
+                mHeaderList = new LinkedHashMap<>();
+            mHeaderList.put(headIndex, item.getNAME());
+            headIndex += itemList.size();
+            dataList.addAll(itemList);
         }
-//        if (mContactList.size() == 0) {
-//            return;
-//        }
-//        addHeaderToList(0, mContactList.get(0).getInitial());
-//        for (int i = 2; i < mContactList.size(); i++) {
-//            if (!mContactList.get(i - 1).getInitial().equalsIgnoreCase(mContactList.get(i).getInitial())) {
-//                addHeaderToList(i, mContactList.get(i).getInitial());
-//            }
-//        }
-    }
 
-    private void addHeaderToList(String index, String header) {
-        mHeaderList.put(index, header);
+        if (mTreeItemAdapter == null) {
+            mTreeItemAdapter = new TreeItemAdapter(LayoutInflater.from(this), null);
+            mTreeItemAdapter.setOnTreeItemClickListener(new TreeItemAdapter.OnTreeItemClickListener() {
+                @Override
+                public void onTreeItemClicked(TreeItem item) {
+                    Intent startIntent = new Intent(getApplicationContext(),
+                            SecondItemsActivity.class);
+                    startIntent.putExtra(getResources().getString(R.string.intent_itemid), item.getFARID());
+                    startIntent.putExtra(getResources().getString(R.string.intent_itemname), item.getNAME());
+                    startActivity(startIntent);
+                }
+            });
+            mRecyclerView.setAdapter(mTreeItemAdapter);
+        }
+        mTreeItemAdapter.setNewData(dataList);
+        mTreeItemAdapter.notifyDataSetChanged();
+        mRecyclerView.invalidate();
     }
 }

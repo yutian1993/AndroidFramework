@@ -9,8 +9,9 @@
         android:gravity="center_vertical"
         android:id="@+id/list_item_name"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:textColor="@color/listitem_title_text"
+        android:layout_marginLeft="10dp"
         android:textSize="14sp" />
 
 </LinearLayout>

@@ -5,4 +5,10 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+
+    <string name="title_software">Software</string>
+    <string name="title_hardware">Hardware</string>
+
+    <string name="intent_itemid">item_id</string>
+    <string name="intent_itemname">item_name</string>
 </resources>
