@@ -32,7 +32,7 @@ public class TreeItemAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new RecycleViewHolder(mLayoutInflater.inflate(R.layout.treeitem, parent, false));
+        return new RecycleViewHolder(mLayoutInflater.inflate(R.layout.recycle_treeitem, parent, false));
     }
 
     @Override

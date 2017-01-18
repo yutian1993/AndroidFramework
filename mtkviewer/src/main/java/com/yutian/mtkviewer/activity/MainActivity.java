@@ -106,6 +106,8 @@ public class MainActivity extends AppCompatActivity
             DBConfigController.getInstance(this);
             mTreeItemController = TreeItemController.getInstance(this);
         }
+
+        generateList();
     }
 
     public void generateList() {
@@ -292,6 +294,15 @@ public class MainActivity extends AppCompatActivity
             //ConfigControl需要提前初始化
             DBConfigController.getInstance(mContext);
             mTreeItemController = TreeItemController.getInstance(this);
+
+            String dbpath = "/storage/emulated/0/MtkDB.db";
+            SharedPreferenceUtil.saveDBPath(this, dbpath);
+            ((NavigationView) findViewById(R.id.nav_view)).getMenu().findItem(R.id.nav_database).setTitle("DataBase：" + FileUtil.getFileName(dbpath, null));
+
+            //Update DB
+            DBConfigController.getInstance(this);
+            mTreeItemController = TreeItemController.getInstance(this);
+            generateList();
 //            Runnable allowRun = allowablePermissionRunnables.get(requestCode);
 //            allowRun.run();
 //            allowablePermissionRunnables.remove(requestCode);

@@ -110,7 +110,7 @@ public class TreeItemController {
         QueryBuilder queryBuilder = gTreeItemDao.queryBuilder();
         queryBuilder.where(TreeItemDao.Properties.FARID_PARENT.eq(parentid));
         if (lastid != null) {
-            queryBuilder.where(TreeItemDao.Properties.FARID.gt(lastid));
+            queryBuilder.where(TreeItemDao.Properties.FARID.lt(lastid));
         }
         queryBuilder.orderDesc(TreeItemDao.Properties.FARID);
         queryBuilder.limit(AppValues.DB_QUERY_LIMIT_COUNTS);

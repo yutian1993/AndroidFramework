@@ -33,22 +33,15 @@
         tools:context=".activity.MainActivity"
         tools:showIn="@layout/app_bar_main">
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/m_swiperefreshlayout"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:scrollbars="vertical">
+        <com.yutian.mtkviewer.widget.LoadRecycleView
+            android:id="@+id/m_items_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:overScrollMode="never">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/m_items_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentRight="true"
-                android:overScrollMode="never">
-
-            </android.support.v7.widget.RecyclerView>
-        </android.support.v4.widget.SwipeRefreshLayout>
+        </com.yutian.mtkviewer.widget.LoadRecycleView>
 
     </RelativeLayout>
 
