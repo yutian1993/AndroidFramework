@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import com.yutian.mtkviewer.R;
 import com.yutian.mtkviewer.dbcontrol.TreeItemController;
 import com.yutian.mtkviewer.dbcontrol.greendao.FARITEM;
+import com.yutian.mtkviewer.widget.PictureView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -21,14 +22,14 @@ import butterknife.ButterKnife;
 public class ItemShowActivity extends AppCompatActivity {
 
     @Bind(R.id.m_itemshow)
-    ImageView mItemShow;
+    PictureView mItemShow;
 
     private TreeItemController mTreeItemController;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.setContentView(R.layout.activity_itemshow);
         ButterKnife.bind(this);
 
@@ -51,8 +52,7 @@ public class ItemShowActivity extends AppCompatActivity {
             this.finish();
 
         if(faritem.getWHOLECONTENTIMG() != null){
-            Bitmap bitmap = BitmapFactory.decodeByteArray(faritem.getWHOLECONTENTIMG(), 0, faritem.getWHOLECONTENTIMG().length);
-            mItemShow.setImageBitmap(bitmap);
+            mItemShow.setPictureByte(faritem.getWHOLECONTENTIMG());
         }else{
             this.finish();
         }

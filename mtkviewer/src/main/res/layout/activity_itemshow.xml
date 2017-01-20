@@ -3,9 +3,11 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
+    android:theme="@style/AppTheme.AppBarOverlay"
+    android:clipToPadding="false"
+    android:fitsSystemWindows="false" >
 
-    <ImageView
+    <com.yutian.mtkviewer.widget.PictureView
         android:id="@+id/m_itemshow"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
