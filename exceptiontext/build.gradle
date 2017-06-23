@@ -9,8 +9,8 @@ android {
 
     defaultConfig {
         applicationId "com.yutian.exceptiontext"
-        minSdkVersion 21
-        targetSdkVersion 23
+        minSdkVersion 22
+        targetSdkVersion 24
         versionCode 1
         versionName "1.0"
     }
@@ -20,11 +20,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'classes.dex'
+    }
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    provided fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile rootProject.ext.butterknife
+    compile rootProject.ext.okio
+    compile rootProject.ext.okhttp
+    compile project(path: ':aidllib')
+    compile project(':utillib')
 }

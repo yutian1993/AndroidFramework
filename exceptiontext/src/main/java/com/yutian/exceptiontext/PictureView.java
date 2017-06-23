@@ -19,16 +19,22 @@ import android.widget.Toast;
  * Created by wuwenchuan on 2017/1/19.
  */
 public class PictureView extends ImageView {
+    private String TAG = "wuwenchuan";
+
     private Context mContext;
     private int mScaleRadio = 1;
-    private float mImaegRadioWH;       //Image radio w/h
-    private float mImageWith;
-    private float mImageHeight;
-    private int mDisplayWidth;
-    private int mDisplayHeight;
+    private int mCurrentScaleRadio = 0;
+    private boolean isZoom = false;
+    private Matrix mDefaultMatrix;
+    private float mDistance = -1;
+//    private float mImaegRadioWH;       //Image radio w/h
+//    private float mImageWith;
+//    private float mImageHeight;
+//    private int mDisplayWidth;
+//    private int mDisplayHeight;
 
     private FingerInfo mFirstFinger = new FingerInfo();
-    private FingerInfo mSecondFinger = new FingerInfo();
+//    private FingerInfo mSecondFinger = new FingerInfo();
 
     private boolean isMoreFingers = false;
 
@@ -48,8 +54,9 @@ public class PictureView extends ImageView {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
-        mDisplayWidth = getMeasuredWidth();
-        mDisplayHeight = getMaxHeight();
+//        mDisplayWidth = getMeasuredWidth();
+//        mDisplayHeight = getMaxHeight();
+        mDefaultMatrix = getMatrix();
     }
 
     @Override
@@ -58,33 +65,26 @@ public class PictureView extends ImageView {
 
         switch (event.getPointerCount()) {
             case 1:            //One finger touch
-                Log.e("wuenchuan", "one fingers");
+//                Log.e(TAG, "one fingers");
 
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
-                        Log.e("wuwenchuan", "Action down");
+//                        Log.e(TAG, "Action down");
                         isMoreFingers = false;
                         if (mTouchEventCountThread.mTouchCount == 0) {
                             postDelayed(mTouchEventCountThread, 500);
                         }
-                        mFirstFinger.mFingerStartX = event.getX();
-                        mFirstFinger.mFingerStartY = event.getY();
-                        mFirstFinger.mFingerEndX = event.getX();
-                        mFirstFinger.mFingerEndY = event.getY();
-                        mFirstFinger.mFingerID = event.getPointerId(MotionEventCompat.getActionIndex(event));
+                        mFirstFinger.initFingerInfo(event);
                         break;
                     case MotionEvent.ACTION_UP:
-                        Log.e("wuwenchuan", "Action up");
+//                        Log.e(TAG, "Action up");
                         if (isMoreFingers) {
-                            isMoreFingers = false;
-                            mTouchEventCountThread.mTouchCount = 0;
-                            mTouchEventCountThread.isLongClick = false;
+                            mTouchEventCountThread.resetStatus();
                             mFirstFinger.resetFingerInfo();
                         } else {
                             mTouchEventCountThread.mTouchCount++;
                             if (mTouchEventCountThread.isLongClick) {
-                                mTouchEventCountThread.mTouchCount = 0;
-                                mTouchEventCountThread.isLongClick = false;
+                                mTouchEventCountThread.resetStatus();
 
                                 //Send message to handler
                                 Message msg = new Message();
@@ -92,15 +92,14 @@ public class PictureView extends ImageView {
                                 mTouchEventHandler.sendMessage(msg);
                             }
                         }
+                        isMoreFingers = false;
                         break;
                     case MotionEvent.ACTION_MOVE:
-                        Log.e("wuwenchuan", "Action move");
+//                        Log.e(TAG, "Action move");
                         if (isMoreFingers)
                             break;
                         if (mFirstFinger.mFingerID == event.getPointerId(MotionEventCompat.getActionIndex(event))) {
-                            float dx = event.getX() - mFirstFinger.mFingerEndX;
-                            float dy = event.getY() - mFirstFinger.mFingerEndY;
-                            translateImage(dx, dy);
+                            translateImage(event.getX() - mFirstFinger.mFingerEndX, event.getY() - mFirstFinger.mFingerEndY);
                             mFirstFinger.mFingerEndX = event.getX();
                             mFirstFinger.mFingerEndY = event.getY();
                         } else {
@@ -115,16 +114,54 @@ public class PictureView extends ImageView {
                 }
                 break;
             case 2:           //Two fingers touch
-                Log.e("wuwenchuan", "two fingers");
+//                Log.e(TAG, "two fingers with action status: " + event.getAction());
+                isZoom = true;
                 isMoreFingers = true;
                 switch (event.getAction()) {
-                    case MotionEvent.ACTION_POINTER_DOWN:
+                    case MotionEvent.ACTION_MOVE:
+//                        Log.e(TAG, "Two finger move");
+//                        if (mFirstFinger.mFingerStartX == -1) {
+//                            mFirstFinger.initFingerInfo(event);
+//                        } else if (mSecondFinger.mFingerStartX == -1) {
+//                            mSecondFinger.mFingerID = 2;
+//                            mSecondFinger.mFingerStartX = event.getX(1);
+//                            mSecondFinger.mFingerStartY = event.getY(1);
+//                            mSecondFinger.mFingerEndX = event.getX(1);
+//                            mSecondFinger.mFingerEndY = event.getY(1);
+//                        } else {
+                            float dx = event.getX(0) - event.getX(1);
+                            float dy = event.getY(0) - event.getY(1);
+                            dx = (float)Math.sqrt(dx*dx+dy*dy);          //Just don't declare so many argument in loop
+                            if (mDistance == -1)
+                                mDistance = dx;
+                            else {
+//                                Log.e(TAG, "mDistance: " + mDistance + " dx: " + dx);
+                                dy = dx;
+                                dx = dx - mDistance;
+                                mDistance = dy;
+                                dx /=(float)1000;
+                                scaleImage(dx, dx);
+                            }
 
+//                        }
+
+                        break;
+                    case MotionEvent.ACTION_DOWN:
+                    case MotionEvent.ACTION_POINTER_DOWN:
+//                        Log.e(TAG, "Two finger action down");
+                        break;
+                    case MotionEvent.ACTION_UP:
+                    case MotionEvent.ACTION_POINTER_UP:
+                    default:
+                        mTouchEventCountThread.resetStatus();
+                        mFirstFinger.resetFingerInfo();
+//                        mSecondFinger.resetFingerInfo();
+                        mDistance = -1;
                         break;
                 }
                 break;
             default:
-                Log.e("wuenchuan", "finger default");
+//                Log.e(TAG, "finger default");
                 isMoreFingers = true;
                 break;
         }
@@ -133,6 +170,7 @@ public class PictureView extends ImageView {
 
     /**
      * Directly set image byte array to ImageView
+     *
      * @param imgByte Image byte
      * @return Right set or not
      */
@@ -141,9 +179,9 @@ public class PictureView extends ImageView {
         if (bitmap == null)
             return false;
         setImageBitmap(bitmap);
-        mImaegRadioWH = bitmap.getWidth()/bitmap.getHeight();
-        mImageWith = bitmap.getWidth();
-        mImageHeight = bitmap.getHeight();
+//        mImaegRadioWH = bitmap.getWidth() / bitmap.getHeight();
+//        mImageWith = bitmap.getWidth();
+//        mImageHeight = bitmap.getHeight();
         return true;
     }
 
@@ -159,21 +197,25 @@ public class PictureView extends ImageView {
             Message msg = new Message();
             if (mTouchCount == 0) {
                 isLongClick = true;
-            }
-            else {
+            } else {
                 msg.arg1 = mTouchCount;
                 mTouchEventHandler.sendMessage(msg);
                 mTouchCount = 0;
             }
+        }
+
+        public void resetStatus() {
+            mTouchCount = 0;
+            isLongClick = false;
         }
     }
 
     public class TouchEventHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
-            Toast.makeText(mContext, "touch " + msg.arg1 + " time", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(mContext, "touch " + msg.arg1 + " time", Toast.LENGTH_SHORT).show();
             Message imgMsg = new Message();
-            if (msg.arg1 ==2) {
+            if (msg.arg1 == 2) {
                 imgMsg.arg1 = 1;
                 mImageHandler.sendMessage(imgMsg);
             }
@@ -185,28 +227,48 @@ public class PictureView extends ImageView {
     public class ImageHandler extends Handler {
         @Override
         public void handleMessage(Message msg) {
-            if (msg.arg1 ==1) {
-                scaleImage((float)0.2, (float)0.2);
+            if (msg.arg1 == 1) {
+                if (isZoom) {      //Dobule click image will reset image
+                    resetImage();
+                    isZoom = false;
+                } else {           //Normal double click just zoom out image
+                    scaleImage((float) 0.2, (float) 0.2);
+                }
             }
         }
     }
 
-    public void scaleImage(float dx, float dy) {
+    protected void scaleImage(float dx, float dy) {
         // Compute the matrix
-        Log.e("scaleImage", "Double Image");
+//        Log.e(TAG + "scaleImage", "dx: " + dx + "dy: " + dy);
+
+        mCurrentScaleRadio += dx;        //Remember the scale radio
+
+        //Too big or small will reset image status
+        if (mCurrentScaleRadio > 2 || mCurrentScaleRadio < -1) {
+            resetImage();
+            mCurrentScaleRadio = 0;
+            return;
+        }
 
         Matrix m = this.getImageMatrix();
-        m.postScale((float)1+dx,(float)1+dy);
+        m.postScale((float) 1+dx, (float) 1+dy);
         this.setImageMatrix(m);
         invalidate();
     }
 
-    public void translateImage(float dx, float dy) {
-        Log.e("translateImage", "dx: " + dx + " dy: " + dy);
+    protected void translateImage(float dx, float dy) {
+//        Log.e(TAG + "translateImage", "dx: " + dx + " dy: " + dy);
 
         Matrix m = getImageMatrix();
         m.postTranslate(dx, dy);
         setImageMatrix(m);
+        invalidate();
+    }
+
+    protected void resetImage() {
+//        Log.e(TAG + "resetImage", "No thing!");
+        setImageMatrix(mDefaultMatrix);
         invalidate();
     }
 
@@ -226,7 +288,16 @@ public class PictureView extends ImageView {
             mFingerEndY = -1;
         }
 
-        enum FINGER_STATUS {FINGER_DOWN, FINGER_UP, FINGER_MOVE,FINGER_ERROR};
+        public void initFingerInfo(MotionEvent motionEvent) {
+            mFingerID = motionEvent.getPointerId(motionEvent.getActionIndex());
+            mFingerStartX = motionEvent.getX();
+            mFingerStartY = motionEvent.getY();
+            mFingerEndX = motionEvent.getX();
+            mFingerEndY = motionEvent.getY();
+        }
+
+        enum FINGER_STATUS {FINGER_DOWN, FINGER_UP, FINGER_MOVE, FINGER_ERROR}
+
     }
 
 

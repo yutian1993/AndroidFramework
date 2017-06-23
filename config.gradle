@@ -4,8 +4,10 @@ ext {
 
     //NetRequest
     retrofit = "com.squareup.retrofit2:retrofit:2.0.0"
-    okhttp = "com.squareup.okhttp3:okhttp:3.2.0"
     volley = "com.mcxiaoke.volley:library:1.0.19"
+    //OKHTTP
+    okhttp = "com.squareup.okhttp3:okhttp:3.6.0"
+    okio = "com.squareup.okio:okio:1.11.0"
 
     //DataBase
     sqlbrite = 'com.squareup.sqlbrite:sqlbrite:0.7.0'

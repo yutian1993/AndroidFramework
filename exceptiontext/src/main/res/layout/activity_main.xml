@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,7 +7,9 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.yutian.exceptiontext.MainActivity">
+    android:orientation="vertical"
+    tools:context="com.yutian.exceptiontext.MainActivity"
+    android:background="@android:color/holo_green_light">
 
     <Button
         android:layout_width="wrap_content"
@@ -25,9 +27,50 @@
         android:layout_alignParentTop="true"
         android:layout_toEndOf="@+id/m_clickException" />
 
-    <com.yutian.exceptiontext.PictureView
-        android:layout_below="@id/m_clickCatchException"
-        android:id="@+id/m_imageviewtest"
+    <Button
+        android:id="@+id/m_sensortest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/m_clickCatchException"
+        android:text="resetview"
+        android:layout_alignParentTop="true"/>
+
+    <!--<com.yutian.exceptiontext.BezierCircle.CustomView-->
+        <!--android:id="@+id/m_bezierview"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_below="@id/m_clickException"/>-->
+
+    <!--<com.yutian.exceptiontext.PictureView-->
+        <!--android:layout_below="@id/m_clickCatchException"-->
+        <!--android:id="@+id/m_imageviewtest"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" />-->
+
+    <!--<com.yutian.exceptiontext.BezierView-->
+        <!--android:id="@+id/mBezierView"-->
+        <!--android:layout_below="@id/m_clickCatchException"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
+
+    <!--<TextView-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_below="@id/m_clickCatchException"-->
+        <!--android:id="@+id/m_textview"/>-->
+
+    <!--<com.yutian.exceptiontext.widget.CircleView-->
+        <!--android:id="@+id/m_circleview"-->
+        <!--android:background="@android:color/white"-->
+        <!--android:layout_below="@id/m_clickCatchException"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-</RelativeLayout>
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@id/m_clickException"
+        android:id="@+id/m_textview"
+        />
+
+</LinearLayout>
